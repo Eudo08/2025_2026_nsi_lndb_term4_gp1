@@ -18,9 +18,8 @@ def bonjour():
     return render_template("index.html")
 
 
-# Route pour traiter le formulaire de soumission
-@site.route("/submit", methods=["POST", "GET"])
+
 
 # Exécuter l'application Flask
-# if __name__ == '__main__':
-#     site.run(debug=True)
+if __name__ == '__main__':
+    site.run(debug=True)
