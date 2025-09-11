@@ -1,0 +1,15 @@
+:root {
+    --main-bg-color: #C7D9DD;
+    --primary-color: #D5E5D5;
+    --secondary-color: #ADB2D4;
+    --text-color: #333;
+    --button-bg-color: #ff4500;
+    --button-hover-color: #ff0000;
+    --button-active-color: #b22222;
+}
+
+
+body {
+    background-color: var(--main-bg-color);
+    
+}

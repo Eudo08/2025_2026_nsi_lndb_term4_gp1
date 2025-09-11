@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleprincipalv3.css') }}">
+    <link rel="stylesheet" href="C:\Users\de-khovrin\Documents\GitHub\2025_2026_nsi_lndb_term4_gp1\interface\static\css\styleprincipal.css">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styleprincipal.css') }}"> -->
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/flavicon1.png') }}">
 
 
@@ -20,16 +21,50 @@
             </h1>
     
         
-        <p class="entry">Entrez votre prénom :</p>
-        <input type="text" class="input-entry" name="prenom" placeholder="Votre prénom ici">
-        <br>
-        <p class="entry">Entrez votre nom :</p>
-        <input type="text" class="input-entry" name="nom" placeholder="Votre nom ici">
-        <br>
-        <p class="entry">Entrez votre nom d'utilisateur :</p>
-        <input type="text" class="input-entry" name="nom d'utilisateur" placeholder="Votre nom d'utilisateur ici">
-        <br>
-    </center>
+            <p class="entry">Entrez votre prénom :</p>
+            <input type="text" class="input-entry" name="prenom" placeholder="Votre prénom ici">
+            <br>
+            </br>
+            <p class="entry">Entrez votre nom :</p>
+            <input type="text" class="input-entry" name="nom" placeholder="Votre nom ici">
+            <br>
+            </br>
+            <p class="entry">Entrez votre nom d'utilisateur :</p>
+            <input type="text" class="input-entry" name="nom_utilisateur" placeholder="Votre nom d'utilisateur ici">
+            <br>
+            </br>
+            <p class="entry">Entrez votre mot de passe :</p>
+            <input type="text" class="input-entry" name="mot_passe" placeholder="Votre mot de passe ici">
+            <br>
+            </br>
+            <button type="submit" class="bouton">S'inscrire</button>
+            <br>
+            <div class="buttons">
+  <button class="blob-btn">
+    Blob Button
+    <span class="blob-btn__inner">
+      <span class="blob-btn__blobs">
+        <span class="blob-btn__blob"></span>
+        <span class="blob-btn__blob"></span>
+        <span class="blob-btn__blob"></span>
+        <span class="blob-btn__blob"></span>
+      </span>
+    </span>
+  </button>
+  <br/>
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <defs>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
+      <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
+    </filter>
+  </defs>
+</svg>
+            </br>
+            <button type="submit" class="bouton">Se connecter ducon</button>
+        </center>
 </body>
 
 </html>
