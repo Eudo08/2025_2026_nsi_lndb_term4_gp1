@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MatchMates</title>
+    <title>Inscription</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styleprincipalv3.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/flavicon1.png') }}">
 
@@ -14,8 +14,22 @@
 
 <body>
     <form id="form-interet" method="POST" action="/submit">
+        <center>
+            <h1>
+                Inscrivez-vous c'est gratuit
+            </h1>
+    
         
-
+        <p class="entry">Entrez votre prénom :</p>
+        <input type="text" class="input-entry" name="prenom" placeholder="Votre prénom ici">
+        <br>
+        <p class="entry">Entrez votre nom :</p>
+        <input type="text" class="input-entry" name="nom" placeholder="Votre nom ici">
+        <br>
+        <p class="entry">Entrez votre nom d'utilisateur :</p>
+        <input type="text" class="input-entry" name="nom d'utilisateur" placeholder="Votre nom d'utilisateur ici">
+        <br>
+    </center>
 </body>
 
 </html>
