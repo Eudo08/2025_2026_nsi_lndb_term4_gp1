@@ -12,10 +12,9 @@ FILE_PATH = 'data.json'  # Chemin du fichier de données
 # Route d'accueil
 @site.route("/")
 def bonjour():
-    # Valeurs par défaut pour les sliders
-    plat = 5
+
     # Afficher la page d'accueil avec les valeurs par défaut
-    return render_template("index.html")
+    return render_template("page_arrive.html")
 
 
 
