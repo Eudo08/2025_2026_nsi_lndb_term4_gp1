@@ -19,7 +19,7 @@
     text-align: center; /* Centrer le texte */
     padding: 20px; /* Espacement interne */
     font-size: 20px; /* Taille du texte */
-    border-radius: 5px;
+    border-radius: 10px;
     width: 100%; /* Prend toute la largeur */
     /* z-index: 1000; Toujours au-dessus des autres éléments */
 }
