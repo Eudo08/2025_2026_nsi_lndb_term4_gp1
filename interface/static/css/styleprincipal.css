@@ -1,27 +1,44 @@
 :root {
-    --main-bg-color: #C7D9DD;
+    --main-bg-color: #fff29a;
     --primary-color: #D5E5D5;
     --secondary-color: #ADB2D4;
     --text-color: #333;
     --button-hover-color: #ADB2D4;
     --button-active-color: #70769e;
+
+    --burnt-sienna: #dd6e42ff;
+    --dutch-white: #e8dab2ff;
+    --paynes-gray: #4f6d7aff;
+    --columbia-blue: #c0d6dfff;
+    --platinum: #eaeaeaff;
 }
 
 .bandeau {
-    background-color: #0c7fa1; /* Couleur de fond */
+    background-color: var(--paynes-gray); /* Couleur de fond */
     color: white; /* Couleur du texte */
     text-align: center; /* Centrer le texte */
-    padding: 15px; /* Espacement interne */
+    padding: 20px; /* Espacement interne */
     font-size: 20px; /* Taille du texte */
-    position: fixed; /* Fixe le bandeau en haut */
-    top: 0;
+    border-radius: 5px;
     width: 100%; /* Prend toute la largeur */
-    z-index: 1000; /* Toujours au-dessus des autres éléments */
+    /* z-index: 1000; Toujours au-dessus des autres éléments */
 }
 
+h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
 
+    text-align: center;
+    margin-top: 300px;
+    margin: 20px 0;
+    margin-bottom: 100px;
+}
+.principal {
+    margin-top: 70px;
+}
 body {
-    background-color: var(--main-bg-color);
+    background-color: var(--platinum);
     font-family: Arial, sans-serif;
     color: var(--text-color);
     font-weight: bold;
