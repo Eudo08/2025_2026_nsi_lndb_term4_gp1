@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from tools_json import load_data, save_data
+# from tools_json import load_data, save_data
 
 # Initialisation de l'application Flask
 site = Flask(__name__)
