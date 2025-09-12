@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-# from tools_json import load_data, save_data
+
 
 # Initialisation de l'application Flask
 site = Flask(__name__)
 site.secret_key = "secret_key_for_flashing"
 
 
-FILE_PATH = 'data.json'  # Chemin du fichier de données
+
 
 
 # Route d'accueil
@@ -14,10 +14,18 @@ FILE_PATH = 'data.json'  # Chemin du fichier de données
 def bonjour():
 
     # Afficher la page d'accueil avec les valeurs par défaut
-    return render_template("page_arrive.html")
+    return render_template("inscription.html")
 
+@site.route("/submit", methods=["POST", "GET"])
+def submit_and_verify():
+    prenom = request.form.get("prenom")
+    nom = request.form.get("nom")
+    nom_utilisateur = request.form.get("nom_utilisateur")
+    mot_passe = request.form.get("mot_passe")
 
-
+    if not all([prenom, nom, nom_utilisateur, mot_passe]):
+        flash("Tous les champs doivent être remplis !", "error")
+        return redirect(url_for("bonjour"))
 
 # Exécuter l'application Flask
 if __name__ == '__main__':

@@ -24,7 +24,18 @@
             <h1>
                 Inscrivez-vous c'est gratuit
             </h1>
-    
+            
+            <div class="flash_message">
+              {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+
+              {% for category, message in messages %}
+              <class="{{ category }}>{{ message }}</class>
+                  {% endfor %}
+
+                  {% endif %}
+                  {% endwith %}
+          </div>
         
             <p class="entry">Entrez votre prénom :</p>
             <input type="text" class="input-entry" name="prenom" placeholder="Votre prénom ici">
@@ -44,7 +55,7 @@
             </br>
             <button type="submit" class="bouton">S'inscrire</button>
             <br>
-            <div class="buttons">
+        
             </br>
             <button type="submit" class="bouton_co">Se connecter ducon</button>
         </center>
