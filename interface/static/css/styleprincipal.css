@@ -13,6 +13,11 @@
     --platinum: #eaeaeaff;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .bandeau {
     background-color: var(--paynes-gray); /* Couleur de fond */
     color: white; /* Couleur du texte */
