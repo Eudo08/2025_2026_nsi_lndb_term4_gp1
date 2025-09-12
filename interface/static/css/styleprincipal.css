@@ -28,15 +28,13 @@
     display: block;
     margin: 10px 30px;
     padding: 10px;
-    width: calc(50% - 40px);
+    width: 300px;
     font-size: 14px;
     border: 2px solid var(--primary-color);
     border-radius: 25px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     color: var(--text-color);
     transition: background-color 0.3s, transform 0.2s;
-    width: 50%;
-
 }
 h1 {
     font-family: 'Arial', sans-serif;
