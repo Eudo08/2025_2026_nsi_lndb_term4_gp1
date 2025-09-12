@@ -8,6 +8,18 @@
     --button-active-color: #b22222;
 }
 
+.bandeau {
+    background-color: #0c7fa1; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    text-align: center; /* Centrer le texte */
+    padding: 15px; /* Espacement interne */
+    font-size: 20px; /* Taille du texte */
+    position: fixed; /* Fixe le bandeau en haut */
+    top: 0;
+    width: 100%; /* Prend toute la largeur */
+    z-index: 1000; /* Toujours au-dessus des autres éléments */
+}
+
 
 body {
     background-color: var(--main-bg-color);
