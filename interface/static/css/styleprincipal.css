@@ -3,13 +3,48 @@
     --primary-color: #D5E5D5;
     --secondary-color: #ADB2D4;
     --text-color: #333;
-    --button-bg-color: #ff4500;
-    --button-hover-color: #ff0000;
-    --button-active-color: #b22222;
+    --button-hover-color: #ADB2D4;
+    --button-active-color: #70769e;
 }
 
 
 body {
     background-color: var(--main-bg-color);
     
+}
+
+.bouton {
+    
+    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.bouton_co {
+    font-size: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;  
+}
+
+.bouton:hover,
+.bouton_co:hover {
+    background-color: var(--button-hover-color);
+    transform: scale(1.05);
+}
+
+.bouton:active,
+.bouton_co:active {
+    background-color: var(--button-active-color);
+    transform: scale(0.95);
 }
