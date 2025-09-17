@@ -23,11 +23,15 @@ def submit_and_verify():
     nom = request.form.get("nom")
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
-    infos.append (prenom, nom, nom_utilisateur, mot_passe)
-    print(infos)
+    infos.append (prenom)
+    infos.append (nom)
+    infos.append (nom_utilisateur)
+    infos.append (mot_passe)
+    print (infos)
     if not all([prenom, nom, nom_utilisateur, mot_passe]):
         flash("Tous les champs doivent être remplis !", "error")
         return redirect(url_for("bonjour"))
+    return render_template("connexion.html")
 
 # Exécution
 if __name__ == '__main__':
