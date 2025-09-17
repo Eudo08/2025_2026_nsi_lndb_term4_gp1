@@ -1,4 +1,6 @@
 import sqlite3
+import data
+
 con = sqlite3.connect("info_idividu.db")
 cur = con.cursor()
 
@@ -20,6 +22,7 @@ cur.execute("""
         ('Arrivée', 'Tristan', 'flash', '456', '2', 'mercredi', '12h')
 """)
 
+cur.executemany("INSERT INTO informations VALUES(?, ?, ?, ?, ?, ?)", data)
 
 con.commit()
 con.close()
