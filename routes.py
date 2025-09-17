@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 
-# Initialisation de l'application Flask
+# Initialisation 
 site = Flask(__name__)
 site.secret_key = "secret_key_for_flashing"
 
@@ -13,7 +13,7 @@ site.secret_key = "secret_key_for_flashing"
 @site.route("/")
 def bonjour():
 
-    # Afficher la page d'accueil avec les valeurs par défaut
+    # affichage
     return render_template("inscription.html")
 
 @site.route("/submit", methods=["POST", "GET"])
@@ -27,6 +27,6 @@ def submit_and_verify():
         flash("Tous les champs doivent être remplis !", "error")
         return redirect(url_for("bonjour"))
 
-# Exécuter l'application Flask
+# Exécution
 if __name__ == '__main__':
     site.run(debug=True)

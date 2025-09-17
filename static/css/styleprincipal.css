@@ -36,11 +36,17 @@
     color: var(--text-color);
     transition: background-color 0.3s, transform 0.2s;
 }
+
+.input-entry:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
 h1 {
     font-family: 'Arial', sans-serif;
     font-size: 40px;
     font-weight: bold;
-
+    color : var(--text-color);
     text-align: center;
     margin-top: 300px;
     margin: 20px 0;
