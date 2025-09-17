@@ -16,6 +16,11 @@ cur.execute("""
     )
 """)
 
+cur.execute("""
+                INSERT INTO information VALUES
+                    ('prenom', 'nom', 'nom_utilisateur', 'mot_passe')
+        """)
+
 # cur.execute("""
 #     INSERT INTO information VALUES
 #         ('Eudocie', 'ABC', 'ABC', '123', '3', 'jeudi', '12h'),
