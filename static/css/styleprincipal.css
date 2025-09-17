@@ -7,6 +7,7 @@
     --button-active-color: #70769e;
 
     --burnt-sienna: #dd6e42ff;
+    --couleur_comple: #E38444;
     --dutch-white: #e8dab2ff;
     --paynes-gray: #4f6d7aff;
     --columbia-blue: #c0d6dfff;
@@ -43,14 +44,14 @@
 }
 
 h1 {
-    font-family: 'Arial', sans-serif;
-    font-size: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 50px;
     font-weight: bold;
-    color : var(--text-color);
+    color : var(--couleur_comple);
     text-align: center;
     margin-top: 300px;
     margin: 20px 0;
-    margin-bottom: 100px;
+    margin-bottom: 90px;
 }
 .principal {
     margin-top: 70px;
