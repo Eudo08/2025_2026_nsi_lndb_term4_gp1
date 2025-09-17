@@ -1,11 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-
+from data import infos_perso
 
 # Initialisation 
 site = Flask(__name__)
 site.secret_key = "secret_key_for_flashing"
-
-
 
 
 
@@ -16,22 +14,29 @@ def bonjour():
     # affichage
     return render_template("inscription.html")
 
+
+
 @site.route("/submit", methods=["POST", "GET"])
 def submit_and_verify():
-    infos = []
+    # infos = []
     prenom = request.form.get("prenom")
     nom = request.form.get("nom")
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
-    infos.append (prenom)
-    infos.append (nom)
-    infos.append (nom_utilisateur)
-    infos.append (mot_passe)
-    print (infos)
+    
     if not all([prenom, nom, nom_utilisateur, mot_passe]):
         flash("Tous les champs doivent être remplis !", "error")
         return redirect(url_for("bonjour"))
+    # else :
+    infos_perso.append (prenom)
+    infos_perso.append (nom)
+    infos_perso.append (nom_utilisateur)
+    infos_perso.append (mot_passe)
+    
     return render_template("connexion.html")
+
+
+
 
 # Exécution
 if __name__ == '__main__':
