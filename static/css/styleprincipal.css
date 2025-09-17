@@ -24,6 +24,14 @@
     /* z-index: 1000; Toujours au-dessus des autres éléments */
 }
 
+.flash_message {
+    color: red;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    margin: 20px 0;
+}
 .input-entry {
     display: block;
     margin: 10px 30px;

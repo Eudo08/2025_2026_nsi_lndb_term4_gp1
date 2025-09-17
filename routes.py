@@ -18,11 +18,13 @@ def bonjour():
 
 @site.route("/submit", methods=["POST", "GET"])
 def submit_and_verify():
+    infos = []
     prenom = request.form.get("prenom")
     nom = request.form.get("nom")
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
-
+    infos.append (prenom, nom, nom_utilisateur, mot_passe)
+    print(infos)
     if not all([prenom, nom, nom_utilisateur, mot_passe]):
         flash("Tous les champs doivent être remplis !", "error")
         return redirect(url_for("bonjour"))
@@ -30,3 +32,5 @@ def submit_and_verify():
 # Exécution
 if __name__ == '__main__':
     site.run(debug=True)
+
+
