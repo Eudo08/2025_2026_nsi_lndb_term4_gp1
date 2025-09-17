@@ -5,7 +5,7 @@ con = sqlite3.connect("info_idividu.db")
 cur = con.cursor()
 
 cur.execute("""
-    CREATE TABLE information (
+    CREATE TABLE IF NOT EXISTS information (
         nom TEXT,
         prenom TEXT,
         pseudo TEXT,
@@ -22,7 +22,8 @@ cur.execute("""
         ('Arrivée', 'Tristan', 'flash', '456', '2', 'mercredi', '12h')
 """)
 
-cur.executemany("INSERT INTO informations VALUES(?, ?, ?, ?, ?, ?)", data)
+cur.executemany("INSERT INTO information VALUES(?, ?, ?, ?, ?, ?)", data)
+
+
 
 con.commit()
-con.close()
