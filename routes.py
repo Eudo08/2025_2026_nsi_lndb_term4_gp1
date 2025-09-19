@@ -15,10 +15,14 @@ def bonjour():
     return render_template("page_arrive.html")
 
 
+def save_info_in_list (info, list):
+    
+    pass
+
+
 
 @site.route("/submit", methods=["POST", "GET"])
 def submit_and_verify():
-    # infos = []
     prenom = request.form.get("prenom")
     nom = request.form.get("nom")
     nom_utilisateur = request.form.get("nom_utilisateur")

@@ -1,5 +1,5 @@
 import sqlite3
-import data
+from data import infos_perso
 
 con = sqlite3.connect("info_idividu.db")
 cur = con.cursor()
@@ -22,7 +22,12 @@ cur.execute("""
         ('Arrivée', 'Tristan', 'flash', '456', '2', 'mercredi', '12h')
 """)
 
+data = [
+    ('Joe', 'Abc', 'Abc', '16287', '4', 'mardi', '13'),
+    ('ANNa', 'bdh', 'Aozsnbc', '7383', '4', 'mardi', '13')
+]
 
+cur.executemany("INSERT INTO information VALUES(?, ?, ?, ?, ?, ?, ?)", data)
 
 con.commit()
 con.close()
