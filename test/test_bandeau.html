@@ -12,16 +12,15 @@
             text-align: center; /* Centrer le texte */
             padding: 15px; /* Espacement interne */
             font-size: 20px; /* Taille du texte */
-            position: fixed; /* Fixe le bandeau en haut */
             top: 0;
             width: 100%; /* Prend toute la largeur */
-            z-index: 1000; /* Toujours au-dessus des autres éléments */
+            z-index: 0; /* Toujours au-dessus des autres éléments */
         }
 
         /* Ajout d'un espace pour le contenu */
         body {
             margin: 0;
-            padding-top: 60px; /* Ajuster selon la hauteur du bandeau */
+            padding-top: calc(100% - 50px);; /* Ajuster selon la hauteur du bandeau */
             background-color: #C7D9DD;
         }
     </style>
