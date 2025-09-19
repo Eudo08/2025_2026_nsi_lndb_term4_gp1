@@ -36,6 +36,10 @@ def submit_and_verify():
     return render_template("connexion.html")
 
 
+def save_info_in_liste ():
+    pass
+
+
 
 
 # Exécution
