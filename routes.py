@@ -12,7 +12,7 @@ site.secret_key = "secret_key_for_flashing"
 def bonjour():
 
     # affichage
-    return render_template("inscription.html")
+    return render_template("page_arrive.html")
 
 
 
@@ -35,7 +35,9 @@ def submit_and_verify():
     
     return render_template("connexion.html")
 
-
+@site.route("/pageprincipale/inscription", methods=["POST"])
+def direction_inscription() :
+    return render_template("inscription.html")
 
 
 # Exécution
