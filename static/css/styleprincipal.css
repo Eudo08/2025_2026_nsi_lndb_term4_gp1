@@ -24,6 +24,19 @@
     width: 100%; 
 }
 
+.bandeau_bas {
+    background-color: var(--paynes-gray); 
+    color: white; 
+    text-align: center;
+    padding: 20px;
+    font-size: 20px; 
+    border-radius: 10px;
+    width: 100%; 
+    margin-top: 40px;
+}
+
+
+
 .flash_message {
     color: red;
     font-family: 'Arial', sans-serif;
