@@ -40,11 +40,13 @@ def submit_and_verify():
     
     return render_template("connexion.html")
 
-@site.route("/pageprincipale/inscription", methods=["POST"])
+@site.route("/pageprincipale/inscription", methods=["GET"])
 def direction_inscription() :
     return render_template("inscription.html")
 
-
+@site.route("/pageprincipale/connexion", methods=["GET"])
+def direction_connexion():
+    return render_template("connexion.html")
 # Exécution
 if __name__ == '__main__':
     site.run(debug=True)
