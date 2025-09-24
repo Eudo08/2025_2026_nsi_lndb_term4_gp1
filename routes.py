@@ -15,13 +15,13 @@ def bonjour():
     return render_template("page_arrive.html")
 
 
-def save_info_in_list (prenom, nom, nom_utilisateur, mot_passe, list):
-    list.append (prenom)
-    list.append (nom)
-    list.append (nom_utilisateur)
-    list.append (mot_passe)
-    return
+def save_info_in_list (liste, prenom, nom, nom_utilisateur, mot_passe):
 
+    liste = liste + prenom
+    liste = liste + nom
+    liste = liste + nom_utilisateur
+    liste = liste + mot_passe
+    return liste
 
 
 @site.route("/submit", methods=["POST", "GET"])
@@ -36,7 +36,7 @@ def submit_and_verify():
         flash("Tous les champs doivent être remplis !", "error")
         return redirect(url_for("bonjour"))
     
-    save_info_in_list (prenom, nom, nom_utilisateur, mot_passe, infos_perso)
+    save_info_in_list (infos_perso, prenom, nom, nom_utilisateur, mot_passe)
     
     return render_template("connexion.html")
 

@@ -24,7 +24,7 @@ cur.execute("""
 
 data = [
     ('Joe', 'Abc', 'Abc', '16287', '4', 'mardi', '13'),
-    ('ANNa', 'bdh', 'Aozsnbc', '7383', '4', 'mardi', '13')
+    ('Xenia', 'bdh', 'Aozsnbc', '7383', '4', 'mardi', '13')
 ]
 
 cur.executemany("INSERT INTO information VALUES(?, ?, ?, ?, ?, ?, ?)", data)
