@@ -4,15 +4,15 @@
 # Structure du projet:
 - Static:
     - Donsier css:  
-        Contien le code css qui permet d'avoir le contenue graphique du site.  
+         Contien le code css qui permet d'avoir le contenue graphique du site.  
     - Dossier images:  
-        Contien les différentes images pour le contenue du site.  
+         Contien les différentes images pour le contenue du site.  
 - Templates:  
-    Dossier contenant la totalité des fichers qui crrespondes au différnetes parties du site.  
+     Dossier contenant la totalité des fichers qui crrespondes au différnetes parties du site.  
 - Routes.py:  
-    Ficher permettant de lancer le site internet et donc pouvoir accéder au projet.  
+     Ficher permettant de lancer le site internet et donc pouvoir accéder au projet.  
 - tools.pty:  
-    Fichier qui traite des donner et les récupères.  
+     Fichier qui traite des donner et les récupères.  
 # Fonctionalité:
 # Prérequis:
 # Modules et fonctions:
