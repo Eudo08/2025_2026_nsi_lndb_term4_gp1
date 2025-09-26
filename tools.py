@@ -16,18 +16,18 @@ cur.execute("""
     )
 """)
 
-cur.execute("""
-    INSERT INTO information VALUES
-        ('Eudocie', 'ABC', 'ABC', '123', '3', 'jeudi', '12h'),
-        ('Arrivée', 'Tristan', 'flash', '456', '2', 'mercredi', '12h')
-""")
+# cur.execute("""
+#     INSERT INTO information VALUES
+#         ('Eudocie', 'ABC', 'ABC', '123', '3', 'jeudi', '12h'),
+#         ('Arrivée', 'Tristan', 'flash', '456', '2', 'mercredi', '12h')
+# """)
 
-data = [
-    ('Joe', 'Abc', 'Abc', '16287', '4', 'mardi', '13'),
-    ('Xenia', 'bdh', 'Aozsnbc', '7383', '4', 'mardi', '13')
-]
+# data = [
+#     ('Joe', 'Abc', 'Abc', '16287', '4', 'mardi', '13'),
+#     ('Xenia', 'bdh', 'Aozsnbc', '7383', '4', 'mardi', '13')
+# ]
 
-cur.executemany("INSERT INTO information VALUES(?, ?, ?, ?, ?, ?, ?)", data)
+# cur.executemany("INSERT INTO information VALUES(?, ?, ?, ?, ?, ?, ?)", infos_perso)
 
 con.commit()
 con.close()

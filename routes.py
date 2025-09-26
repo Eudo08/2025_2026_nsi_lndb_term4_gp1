@@ -15,8 +15,9 @@ def bonjour():
     return render_template("page_arrive.html")
 
 
-def save_info_in_list (liste, prenom, nom, nom_utilisateur, mot_passe):
-    liste.append([prenom, nom, nom_utilisateur, mot_passe])
+# def save_info_in_list (liste, prenom, nom, nom_utilisateur, mot_passe):
+#     liste = []
+#     liste.append([prenom, nom, nom_utilisateur, mot_passe])
 
 
 @site.route("/submit", methods=["POST", "GET"])
@@ -27,15 +28,16 @@ def submit_and_verify():
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
     
+    infos_perso.append((prenom, nom, nom_utilisateur, mot_passe))
+    print(infos_perso)
+
     if not all([prenom, nom, nom_utilisateur, mot_passe]):
         flash("Tous les champs doivent être remplis !", "error")
         return redirect(url_for("bonjour"))
     
-    save_info_in_list (infos_perso, prenom, nom, nom_utilisateur, mot_passe)
+    # infos_perso.append((prenom, nom, nom_utilisateur, mot_passe))
     
     return render_template("connexion.html")
-
-
 
 @site.route("/pageprincipale/inscription", methods=["GET"])
 def direction_inscription() :
@@ -51,5 +53,3 @@ def direction_page_arrive():
 # Exécution
 if __name__ == '__main__':
     site.run(debug=True)
-
-
