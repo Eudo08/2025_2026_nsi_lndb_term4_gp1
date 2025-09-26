@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-from data import infos_perso
+# from data import infos_perso
+from tools import add_infos
 
 # Initialisation 
 site = Flask(__name__)
@@ -20,6 +21,7 @@ def bonjour():
 #     liste.append([prenom, nom, nom_utilisateur, mot_passe])
 
 
+
 @site.route("/submit", methods=["POST", "GET"])
 def submit_and_verify():
     
@@ -28,8 +30,10 @@ def submit_and_verify():
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
     
-    infos_perso.append((prenom, nom, nom_utilisateur, mot_passe))
-    print(infos_perso)
+    add_infos(prenom, nom, nom_utilisateur, mot_passe)
+
+    # infos_perso.append((prenom, nom, nom_utilisateur, mot_passe))
+    # print(infos_perso)
 
     if not all([prenom, nom, nom_utilisateur, mot_passe]):
         flash("Tous les champs doivent être remplis !", "error")
