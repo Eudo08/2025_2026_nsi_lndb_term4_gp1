@@ -28,15 +28,16 @@ def submit_and_verify():
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
     
+    infos_perso.append((prenom, nom, nom_utilisateur, mot_passe))
+    print(infos_perso)
+
     if not all([prenom, nom, nom_utilisateur, mot_passe]):
         flash("Tous les champs doivent être remplis !", "error")
         return redirect(url_for("bonjour"))
     
-    infos_perso.append((prenom, nom, nom_utilisateur, mot_passe))
+    # infos_perso.append((prenom, nom, nom_utilisateur, mot_passe))
     
     return render_template("connexion.html")
-
-print(infos_perso)
 
 @site.route("/pageprincipale/inscription", methods=["GET"])
 def direction_inscription() :
