@@ -87,7 +87,7 @@ body {
 }
 
 .bouton {
-    
+    color: var(--paynes-gray);
     font-size: 16px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -99,6 +99,8 @@ body {
     transition: background-color 0.3s, transform 0.2s;
 }
 .bouton_co {
+    color: var(--paynes-gray);
+    
     font-size: 10px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
