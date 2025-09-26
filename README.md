@@ -6,10 +6,5 @@
 # Prérequis:
 # Modules et fonctions:
 # Créateurs:
-<<<<<<< Updated upstream
-# Status:
-En cours de production!
-=======
 # Statut:
 En cours de production!
->>>>>>> Stashed changes
