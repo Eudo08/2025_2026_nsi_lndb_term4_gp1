@@ -45,6 +45,9 @@ def direction_inscription() :
 def direction_connexion():
     return render_template("connexion.html")
 
+@site.route("/page_arrive", methods=["GET"])
+def direction_page_arrive():
+    return render_template("page_arrive.html")
 # Exécution
 if __name__ == '__main__':
     site.run(debug=True)
