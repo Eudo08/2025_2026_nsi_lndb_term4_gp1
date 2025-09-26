@@ -16,11 +16,11 @@ def bonjour():
 
 
 def save_info_in_list (liste, prenom, nom, nom_utilisateur, mot_passe):
-
-    liste = liste + prenom
-    liste = liste + nom
-    liste = liste + nom_utilisateur
-    liste = liste + mot_passe
+    liste = []
+    liste.append(prenom)
+    liste.append(nom)
+    liste.append(nom_utilisateur)
+    liste.append(mot_passe)
     return liste
 
 
