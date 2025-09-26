@@ -6,5 +6,5 @@
 # Prérequis:
 # Modules et fonctions:
 # Créateurs:
-# Statu:
+# Status:
 En cours de production!
