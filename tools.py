@@ -31,3 +31,4 @@ cur.executemany("INSERT INTO information VALUES(?, ?, ?, ?, ?, ?, ?)", data)
 
 con.commit()
 con.close()
+

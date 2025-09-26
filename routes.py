@@ -16,12 +16,7 @@ def bonjour():
 
 
 def save_info_in_list (liste, prenom, nom, nom_utilisateur, mot_passe):
-
-    liste = liste + prenom
-    liste = liste + nom
-    liste = liste + nom_utilisateur
-    liste = liste + mot_passe
-    return liste
+    liste.append([prenom, nom, nom_utilisateur, mot_passe])
 
 
 @site.route("/submit", methods=["POST", "GET"])
@@ -40,6 +35,8 @@ def submit_and_verify():
     
     return render_template("connexion.html")
 
+
+
 @site.route("/pageprincipale/inscription", methods=["GET"])
 def direction_inscription() :
     return render_template("inscription.html")
@@ -47,6 +44,7 @@ def direction_inscription() :
 @site.route("/pageprincipale/connexion", methods=["GET"])
 def direction_connexion():
     return render_template("connexion.html")
+
 # Exécution
 if __name__ == '__main__':
     site.run(debug=True)
