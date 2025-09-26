@@ -2,9 +2,9 @@
 
 # Description:
 # Structure du projet:
-# Fonctinalité:
+# Fonctionalité:
 # Prérequis:
 # Modules et fonctions:
 # Créateurs:
-# Status:
-En cours de production.
+# Statu:
+En cours de production!
