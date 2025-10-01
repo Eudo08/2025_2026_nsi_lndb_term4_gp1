@@ -143,7 +143,7 @@ body {
     z-index: 1000;           
 }
 
-.bouton_hd_inscr{
+.bouton_hd_inscr:hover{
     background-color: var(--button-active-color);
     color: white;
     transform: scale(1.05);
