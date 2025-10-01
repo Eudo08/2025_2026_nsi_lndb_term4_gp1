@@ -125,7 +125,7 @@ body {
     transform: scale(0.95);
 }
 
-.bouton_haut_droite {   
+.bouton_hd_inscr {   
     position: sticky;
     top: 20px;           
     left: 1780px;         
@@ -142,7 +142,7 @@ body {
     z-index: 1000;           
 }
 
-.bouton_haut_droite:hover{
+.bouton_hd_inscr{
     background-color: var(--button-active-color);
     color: white;
     transform: scale(1.05);
