@@ -29,8 +29,6 @@ def submit_and_verify():
     nom = request.form.get("nom")
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
-    
-    add_infos(prenom, nom, nom_utilisateur, mot_passe)
 
     # infos_perso.append((prenom, nom, nom_utilisateur, mot_passe))
     # print(infos_perso)
@@ -40,6 +38,7 @@ def submit_and_verify():
         return redirect(url_for("bonjour"))
     
     # infos_perso.append((prenom, nom, nom_utilisateur, mot_passe))
+    add_infos(prenom, nom, nom_utilisateur, mot_passe)
     
     return render_template("connexion.html")
 
@@ -54,6 +53,7 @@ def direction_connexion():
 @site.route("/page_principale", methods=["GET"])
 def direction_page_arrive():
     return render_template("page_principale.html")
+
 # Exécution
 if __name__ == '__main__':
     site.run(debug=True)
