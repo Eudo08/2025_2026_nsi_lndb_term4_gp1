@@ -26,6 +26,7 @@
 }
 
 .bandeau_bas {
+    position: fixed;
     background-color: var(--paynes-gray); 
     color: white; 
     text-align: center;
