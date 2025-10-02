@@ -2,51 +2,55 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bonn Bouf</title>
-    <!-- <link rel="stylesheet" href="C:\Users\de-khovrin\Documents\GitHub\2025_2026_nsi_lndb_term4_gp1\static\css\styleprincipal.css"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleprincipal.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/flavicon2.png') }}">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bonn Bouf</title>
+  <!-- <link rel="stylesheet" href="C:\Users\de-khovrin\Documents\GitHub\2025_2026_nsi_lndb_term4_gp1\static\css\styleprincipal.css"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styleprincipal.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/flavicon2.png') }}">
 
 
 </head>
 
 <body>
-      <div class="bandeau">
-        lunch with me
-        <a href="/pageprincipale/inscription" class="bouton_hd_inscr">S'inscrire</a>
-        <a href="/pageprincipale/connexion" class="bouton_hd_co">Se connecter</a>
-      </div>
-      <div id="main" class="principal">
+  <div class="bandeau">
+    lunch with me
+    <a href="/pageprincipale/inscription" class="bouton_hd_inscr">S'inscrire</a>
+    <a href="/pageprincipale/connexion" class="bouton_hd_co">Se connecter</a>
+  </div>
+  <div id="main" class="principal">
 
-        <center>
-            <h1>
-              Bonn Bouf – Mangez Ensemble, Partagez un Moment Sympa !
-            </h1>
-            
-            <p>Vous êtes à la cantine, mais vous mangez seul(e) ? Ça peut arriver à tout le monde, mais pourquoi ne pas profiter de l'occasion pour rencontrer de nouvelles personnes ? Bonn Bouf est une plateforme simple et fun qui vous permet de trouver des personnes qui, comme vous, cherchent à partager un repas à la cantine.
+    <div class="container">
+      <h1>Bonn Bouf – Partage ton repas à la cantine</h1>
 
-              Que vous soyez seul(e) à 12h ou 13h, vous pouvez facilement vous connecter avec d'autres personnes qui mangent à la même heure, et qui seraient ravies de partager un moment convivial autour d'un plat ! En quelques clics, vous pouvez inviter 1 à 3 inconnus à vous rejoindre, ou vous inscrire pour être invité(e) à partager un repas avec des gens sympas.
-              
-              Les avantages ?
-              
-              Simplicité : Trouvez un(e) ou plusieurs personnes qui mangent à la même heure.
-              
-              Convivalité : Profitez d'un déjeuner plus agréable, et pourquoi pas, faire de nouvelles rencontres !
-              
-              Gratuit : Pas de frais, juste un petit geste pour rendre vos pauses déjeuner plus fun et détendues.
-              
-              Bonn Bouf est l'endroit idéal pour créer des moments de partage autour d’un bon repas, en toute simplicité !</p>
-            <br>
-              
-            
-        </center>
-      </div>
-      <div class="bandeau_bas">
-        Informations:
-      </div>
+      <p>Vous êtes à la cantine, mais vous mangez seul(e) ? Ça peut arriver à tout le monde, mais pourquoi ne pas
+        profiter de l'occasion pour rencontrer de nouvelles personnes ? <span class="highlight">Bonn Bouf</span> est une
+        plateforme simple et fun qui vous permet de trouver des personnes qui, comme vous, cherchent à partager un repas
+        à la cantine.</p>
+
+      <p>Que vous soyez seul(e) à 12h ou 13h, vous pouvez facilement vous connecter avec d'autres personnes qui mangent
+        à la même heure, et qui seraient ravies de partager un moment convivial autour d'un plat ! En quelques clics,
+        vous pouvez inviter 1 à 3 inconnus à vous rejoindre, ou vous inscrire pour être invité(e) à partager un repas
+        avec des gens sympas.</p>
+
+      <h2>Les avantages ?</h2>
+      <ul>
+        <li><span class="highlight">Simplicité :</span> Trouvez un(e) ou plusieurs personnes qui mangent à la même
+          heure.</li>
+        <li><span class="highlight">Convivialité :</span> Profitez d'un déjeuner plus agréable, et pourquoi pas, faire
+          de nouvelles rencontres !</li>
+        <li><span class="highlight">Gratuit :</span> Pas de frais, juste un petit geste pour rendre vos pauses déjeuner
+          plus fun et détendues.</li>
+      </ul>
+
+      <p><span class="highlight">Bonn Bouf</span> est l'endroit idéal pour créer des moments de partage autour d’un bon
+        repas, en toute simplicité !</p>
+    </div>
+  </div>
+  <div class="bandeau_bas">
+    Informations:
+  </div>
 </body>
 
 </html>
