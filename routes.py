@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 
-
 # Initialisation 
 site = Flask(__name__)
 site.secret_key = "secret_key_for_flashing"
@@ -33,13 +32,16 @@ def add_infos (nom, prenom, nom_utilisateur, mot_passe):
     """)
 
     cur.execute("INSERT INTO information (nom, prenom, id, mot_passe) VALUES(?, ?, ?, ?)", (nom, prenom, nom_utilisateur, mot_passe))
-    print(nom, prenom, nom_utilisateur, mot_passe)
+    # print(nom, prenom, nom_utilisateur, mot_passe)
 
     con.commit()
     con.close()
 
 
-@site.route("/submit", methods=["POST", "GET"])
+def compar_infos ()
+
+
+@site.route("/submit", methods=["POST", "GET"])        # page s'inscrire
 def submit_and_verify():
     
     prenom = request.form.get("prenom")
@@ -63,8 +65,10 @@ def direction_inscription() :
 def direction_connexion():
     return render_template("connexion.html")
 
-@site.route("/page_principale", methods=["GET"])
+
+@site.route("/page_principale", methods=["POST", "GET"])   # page de connection
 def direction_page_arrive():
+
     return render_template("page_principale.html")
 
 
