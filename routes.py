@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-# from data import infos_perso
-# from tools import add_infos
+
 
 # Initialisation 
 site = Flask(__name__)
 site.secret_key = "secret_key_for_flashing"
+
 
 # Route d'accueil
 @site.route("/")
@@ -13,10 +13,6 @@ def bonjour():
     # affichage
     return render_template("page_arrive.html")
 
-
-# def save_info_in_list (liste, prenom, nom, nom_utilisateur, mot_passe):
-#     liste = []
-#     liste.append([prenom, nom, nom_utilisateur, mot_passe])
 
 def add_infos (nom, prenom, nom_utilisateur, mot_passe):
 
@@ -51,14 +47,10 @@ def submit_and_verify():
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
 
-    # infos_perso.append((prenom, nom, nom_utilisateur, mot_passe))
-    # print(infos_perso)
-
     if not all([nom, prenom, nom_utilisateur, mot_passe]):
         flash("Tous les champs doivent être remplis !", "error")
         return redirect(url_for("bonjour"))
     
-    # infos_perso.append((prenom, nom, nom_utilisateur, mot_passe))
     add_infos(prenom, nom, nom_utilisateur, mot_passe)
     
     return render_template("connexion.html")
@@ -74,6 +66,7 @@ def direction_connexion():
 @site.route("/page_principale", methods=["GET"])
 def direction_page_arrive():
     return render_template("page_principale.html")
+
 
 # Exécution
 if __name__ == '__main__':
