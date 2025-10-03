@@ -1,5 +1,4 @@
 import sqlite3
-import tools
 # from data import infos_perso
 
 con = sqlite3.connect("info_idividu.db")
