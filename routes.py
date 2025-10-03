@@ -1,4 +1,19 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+import sqlite3
+con = sqlite3.connect("info_idividu.db",check_same_thread=False)
+cur = con.cursor()
+
+cur.execute("""
+    CREATE TABLE IF NOT EXISTS information (
+        nom TEXT,
+        prenom TEXT,
+        id TEXT,
+        mot_passe TEXT,
+        nb_personne INTEGER,
+        jour TEXT,
+        heure TEXT
+    )
+""")
 
 # Initialisation 
 site = Flask(__name__)
@@ -15,9 +30,14 @@ def bonjour():
 
 def add_infos (nom, prenom, nom_utilisateur, mot_passe):
 
-    import sqlite3
-    con = sqlite3.connect("info_idividu.db")
-    cur = con.cursor()
+    cur.execute("INSERT INTO information (nom, prenom, id, mot_passe) VALUES(?, ?, ?, ?)", (nom, prenom, nom_utilisateur, mot_passe))
+    # print(nom, prenom, nom_utilisateur, mot_passe)
+
+    con.commit()
+    con.close()
+
+
+def compar_infos (nom_utilisateur, mot_passe):
 
     cur.execute("""
         CREATE TABLE IF NOT EXISTS information (
@@ -31,14 +51,9 @@ def add_infos (nom, prenom, nom_utilisateur, mot_passe):
         )
     """)
 
-    cur.execute("INSERT INTO information (nom, prenom, id, mot_passe) VALUES(?, ?, ?, ?)", (nom, prenom, nom_utilisateur, mot_passe))
-    # print(nom, prenom, nom_utilisateur, mot_passe)
-
-    con.commit()
-    con.close()
 
 
-def compar_infos ()
+
 
 
 @site.route("/submit", methods=["POST", "GET"])        # page s'inscrire
