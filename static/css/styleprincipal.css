@@ -45,7 +45,7 @@ color: #e67e22;
     padding-top: 20px;
     font-size: 20px; 
     border-radius: 10px;
-    width: 100%; 
+    width: 100%;
 }
 
 .bandeau_bas {
@@ -102,6 +102,17 @@ h1 {
 .principal {
     margin-top: 70px;
 }
+
+.container{
+    padding-left: 150px;
+    padding-right: 150px;
+}
+
+.container_inside{
+    padding-left: 550px;
+    padding-right: 550px;
+}
+
 body {
     background-color: var(--platinum);
     font-family: Arial, sans-serif;
@@ -192,7 +203,7 @@ body {
     z-index: 1000;
 }
 
-.butto_hd_co:hover {
+.bouton_hd_co:hover {
     background-color: var(--button-active-color);
     color: white;
     transform: scale(1.05);
