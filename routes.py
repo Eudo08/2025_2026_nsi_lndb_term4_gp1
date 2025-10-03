@@ -9,7 +9,7 @@ cur.execute("""
         nom TEXT,
         prenom TEXT,
         username UNIQUE TEXT,
-        mot_passe TEXT,
+        mot_de_passe TEXT,
         nb_personne INTEGER,
         jour TEXT,
         heure TEXT
@@ -31,19 +31,20 @@ def bonjour():
 
 def add_infos (nom, prenom, nom_utilisateur, mot_passe):
 
-    cur.execute("INSERT INTO information (nom, prenom, username, mot_passe) VALUES(?, ?, ?, ?)", (nom, prenom, nom_utilisateur, mot_passe))
+    cur.execute("INSERT INTO information (nom, prenom, username, mot_de_passe) VALUES(?, ?, ?, ?)", (nom, prenom, nom_utilisateur, mot_passe))
     # print(nom, prenom, nom_utilisateur, mot_passe)
 
     con.commit()
     con.close()
 
 
-def compar_infos (nom_utilisateur, mot_passe):
-    cur.execute("SELECT username, mot_passe FROM information")
-    if nom_utilisateur == ... and mot_passe == ... :
-
-
-
+def compar_infos (nom_utilisateur, mot_passe, page):
+    cur.execute("SELECT username, mot_de_passe FROM information")
+    if nom_utilisateur == "username" and mot_passe == "mot_de_passe" :
+        return page
+    else :
+        flash("Attention, il y a une erreure dans votre mot de passe ou dans votre iddentifiant.")
+        return redirect(url_for("bonjour"))
 
 
 @site.route("/submit", methods=["POST", "GET"])        # page s'inscrire
@@ -75,9 +76,9 @@ def direction_connexion():
 def direction_page_arrive():
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
+    page = render_template("page_principale.html")
 
-
-    return render_template("page_principale.html")
+    compar_infos (nom_utilisateur, mot_passe, page)
 
 
 # Exécution
