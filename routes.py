@@ -8,7 +8,7 @@ cur.execute("""
         id INTEGER PRIMARY KEY,
         nom TEXT,
         prenom TEXT,
-        username UNIQUE TEXT,
+        username TEXT UNIQUE,
         mot_de_passe TEXT,
         nb_personne INTEGER,
         jour TEXT,
@@ -77,6 +77,10 @@ def direction_page_arrive():
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
     page = render_template("page_principale.html")
+
+    if not all([nom_utilisateur, mot_passe]):
+        flash("Tous les champs doivent être remplis !", "error")
+        return redirect(url_for("bonjour"))
 
     compar_infos (nom_utilisateur, mot_passe, page)
 
