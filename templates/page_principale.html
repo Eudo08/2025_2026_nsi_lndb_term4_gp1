@@ -6,18 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bonn Bouf</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleprincipalv3.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleprincipal.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/flavicon1.png') }}">
 
 
 </head>
 
 <body>
-    <form id="form-interet" method="POST">
-        <div class="lundi">
-            <p>Lundi</p>
+    <div class="bandeau">
+        lunch with me
+    </div>
+    <div id="main" class="principal">
+        <h1>Vos disponibilités</h1>
+        <div class="jours">
+            <div class="lundi">
+                <p>Lundi</p>
+            </div>
+            <div class="Mardi">
+                <p>Mardi</p>
+            </div>
+            <div class="Mercredi">
+                <p>Mercredi</p>
+            </div>
+            <div class="Jeudi">
+                <p>Jeudi</p>
+            </div>
+            <div class="Vendredi">
+                <p>Vendredi</p>
+            </div>
         </div>
 
+
+          
+    </div>
+        <div class="bandeau_bas">
+            Informations:
+        </div>
 </body>
 
 </html>
