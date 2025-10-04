@@ -29,7 +29,7 @@ def bonjour():
     return render_template("page_arrive.html")
 
 
-def add_infos (nom, prenom, nom_utilisateur, mot_passe):
+def creation_pers (nom, prenom, nom_utilisateur, mot_passe):
 
     cur.execute("INSERT INTO information (nom, prenom, username, mot_de_passe) VALUES(?, ?, ?, ?)", (nom, prenom, nom_utilisateur, mot_passe))
     # print(nom, prenom, nom_utilisateur, mot_passe)
@@ -46,6 +46,8 @@ def compar_infos (nom_utilisateur, mot_passe, page):
         flash("Attention, il y a une erreure dans votre mot de passe ou dans votre iddentifiant.")
         return redirect(url_for("bonjour"))
 
+def add_info (collonne, ligne, info):      # Pour ajouter le jour, l'heure et le nombre de personne
+    cur.execute("INSERT INTO information (?) VALUES(?) WHERE id = ?", (collonne, info, ligne))
 
 @site.route("/submit", methods=["POST", "GET"])        # page s'inscrire
 def submit_and_verify():
@@ -59,7 +61,7 @@ def submit_and_verify():
         flash("Tous les champs doivent être remplis !", "error")
         return redirect(url_for("bonjour"))
     
-    add_infos(prenom, nom, nom_utilisateur, mot_passe)
+    creation_pers(prenom, nom, nom_utilisateur, mot_passe)
     
     return render_template("connexion.html")
 
@@ -70,7 +72,6 @@ def direction_inscription() :
 @site.route("/pageprincipale/connexion", methods=["GET"])
 def direction_connexion():
     return render_template("connexion.html")
-
 
 @site.route("/page_principale", methods=["POST", "GET"])   # page de connection
 def direction_page_arrive():
