@@ -48,6 +48,7 @@ def compar_infos (nom_utilisateur, mot_passe, page):
 
 def add_info (collonne, ligne, info):      # Pour ajouter le jour, l'heure et le nombre de personne
     cur.execute("INSERT INTO information (?) VALUES(?) WHERE id = ?", (collonne, info, ligne))
+    
 
 @site.route("/submit", methods=["POST", "GET"])        # page s'inscrire
 def submit_and_verify():
