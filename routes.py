@@ -38,7 +38,8 @@ def creation_pers (nom, prenom, nom_utilisateur, mot_passe):
     con.close()
 
 
-def compar_infos (nom_utilisateur, mot_passe, page):
+def compar_infos (nom_utilisateur, mot_passe):
+    page = render_template("page_principale.html")
     cur.execute("SELECT username, mot_de_passe FROM information")
     if nom_utilisateur == "username" and mot_passe == "mot_de_passe" :
         return page
@@ -60,7 +61,7 @@ def submit_and_verify():
 
     if not all([nom, prenom, nom_utilisateur, mot_passe]):
         flash("Tous les champs doivent être remplis !", "error")
-        return redirect(url_for("bonjour"))
+        return redirect("/pageprincipale/inscription?error=1")
     
     creation_pers(prenom, nom, nom_utilisateur, mot_passe)
     
@@ -78,13 +79,12 @@ def direction_connexion():
 def direction_page_arrive():
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
-    page = render_template("page_principale.html")
 
     if not all([nom_utilisateur, mot_passe]):
         flash("Tous les champs doivent être remplis !", "error")
-        return redirect(url_for("bonjour"))
+        return redirect("/pageprincipale/connexion?error=1")
 
-    compar_infos (nom_utilisateur, mot_passe, page)
+    compar_infos (nom_utilisateur, mot_passe)
 
 
 # Exécution
