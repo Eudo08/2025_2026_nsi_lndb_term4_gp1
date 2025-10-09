@@ -22,7 +22,7 @@ site.secret_key = "secret_key_for_flashing"
 
 
 # Route d'accueil
-@site.route("/")
+@site.route("/")        # page d'accueil
 def bonjour():
 
     # affichage
@@ -38,7 +38,7 @@ def creation_pers (nom, prenom, nom_utilisateur, mot_passe):
     con.close()
 
 
-def compar_infos (nom_utilisateur, mot_passe):
+def compar_infos_connection (nom_utilisateur, mot_passe):
     page = render_template("page_principale.html")
     cur.execute("SELECT username, mot_de_passe FROM information")
     if nom_utilisateur == "username" and mot_passe == "mot_de_passe" :
@@ -49,6 +49,9 @@ def compar_infos (nom_utilisateur, mot_passe):
 
 def add_info (collonne, ligne, info):      # Pour ajouter le jour, l'heure et le nombre de personne
     cur.execute("INSERT INTO information (?) VALUES(?) WHERE id = ?", (collonne, info, ligne))
+
+def compar_infos_dej (nb_personne, jour, heure):
+    pass
     
 
 @site.route("/submit", methods=["POST", "GET"])        # page s'inscrire
@@ -84,7 +87,7 @@ def direction_page_arrive():
         flash("Tous les champs doivent être remplis !", "error")
         return redirect("/pageprincipale/connexion?error=1")
 
-    compar_infos (nom_utilisateur, mot_passe)
+    compar_infos_connection (nom_utilisateur, mot_passe)
 
 
 # Exécution
