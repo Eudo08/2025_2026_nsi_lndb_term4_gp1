@@ -1,5 +1,5 @@
 import sqlite3
-con = sqlite3.connect("info_idividu.db",check_same_thread=False)
+con = sqlite3.connect("essaie.db",check_same_thread=False)
 cur = con.cursor()
 
 cur.execute("""
@@ -18,10 +18,11 @@ def creation_pers (nom, prenom):
     # print(nom, prenom, nom_utilisateur, mot_passe)
 
     con.commit()
-    con.close()
+    # con.close()
 
 def add_info (collonne, ligne, info):      # Pour ajouter le jour, l'heure et le nombre de personne
-    cur.execute("INSERT INTO info (?) VALUES(?) WHERE id = ?", (collonne, info, ligne))
+    cur.execute("INSERT INTO info (?) VALUES(?) WHERE id = (?)", (collonne, info, ligne))
+    con.commit()
 
 def compar_infos_dej (nb_pers_voulu):
     cur.execute("SELECT nb_personne FROM info")
