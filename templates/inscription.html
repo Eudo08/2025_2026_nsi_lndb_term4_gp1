@@ -62,11 +62,17 @@
 
 <script>
   const params = new URLSearchParams(window.location.search);
-
+  const maDiv = document.getElementById('error');
   if (! params.get('error')) {
-    const maDiv = document.getElementById('error');
     if (maDiv) {
       maDiv.style.display = 'none';
+    }
+  } else {
+    if (params.get("error") === "1") {
+      maDiv.innerHTML = "remplissez tous les champs !!"
+    }
+    if (params.get("error") === "2") {
+      maDiv.innerHTML = "IHJDFPO"
     }
   }
 </script>
