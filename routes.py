@@ -18,7 +18,7 @@ cur.execute("""
 
 # Initialisation 
 site = Flask(__name__)
-site.secret_key = "secret_key_for_flashing"
+
 
 
 # Route d'accueil

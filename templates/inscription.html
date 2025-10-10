@@ -13,6 +13,7 @@
 
 </head>
 
+
 <body>
   <div class="bandeau">
     lunch with me
@@ -23,6 +24,7 @@
         <h1>
           Inscrivez-vous c'est gratuit
         </h1>
+        <p id="error" style="color:red;">Une erreur lol</p>
 
         <p class="entry">Entrez votre prénom :</p>
         <input type="text" class="input-entry" name="prenom" placeholder="Votre prénom ici">
@@ -55,5 +57,18 @@
     Informations:
   </div>
 </body>
+
+
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  if (! params.get('error')) {
+    const maDiv = document.getElementById('error');
+    if (maDiv) {
+      maDiv.style.display = 'none';
+    }
+  }
+</script>
 
 </html>
