@@ -26,12 +26,15 @@ def add_info(colonne, valeur, id_perso):
     con.commit()
 
 def compar_infos_dej (colonne, nb_pers_voulu):
-    sql = f"SELECT {colonne} FROM info"
-    cur.execute(sql)
-    if nb_pers_voulu == sql:
-        return True
-    else : 
-        return False
+    cur.execute("SELECT {colonne} FROM info WHERE valeur == ?", )
+    cur.execute(sql, (nb_pers_voulu))
+    resultats = cur.fetchall()
+    for resultat in resultats:
+        print(resultat)
+    # if nb_pers_voulu == sql:
+    #     return True
+    # else : 
+    #     return False
     
 
 
