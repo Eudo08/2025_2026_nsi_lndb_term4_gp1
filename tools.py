@@ -20,24 +20,26 @@ def creation_pers (nom, prenom):
     con.commit()
     return id
     
-def add_info (ligne, info, id_perso):      # Pour ajouter le jour, l'heure et le nombre de personne
-    cur.execute("INSERT INTO info (?) VALUES(?) WHERE id = ?", (ligne, info, id_perso ))
+def add_info(colonne, valeur, id_perso):
+    sql = f"UPDATE info SET {colonne} = ? WHERE id = ?"
+    cur.execute(sql, (valeur, id_perso))
     con.commit()
 
-def compar_infos_dej (nb_pers_voulu):
-    cur.execute("SELECT nb_personne FROM info")
-    if nb_pers_voulu == "nb_personne":
+def compar_infos_dej (colonne, nb_pers_voulu):
+    sql = f"SELECT {colonne} FROM info"
+    cur.execute(sql)
+    if nb_pers_voulu == sql:
         return True
     else : 
         return False
     
 
 
-id = creation_pers("abc", "adren")
+# id = creation_pers("abc", "adren")
 # add_info("nb_personne", 4, id)
-creation_pers("aze", "Gabriel")
+# creation_pers("aze", "Gabriel")
 # add_info("nb_personne", "Gabriel", 2)
-# print (compar_infos_dej (4))
+print (compar_infos_dej ("nb_personne", 4))
 
 
 

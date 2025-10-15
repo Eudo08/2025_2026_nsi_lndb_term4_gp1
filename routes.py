@@ -55,7 +55,6 @@ def submit_and_verify():
     mot_passe = request.form.get("mot_passe")
 
     if not all([nom, prenom, nom_utilisateur, mot_passe]):
-        flash("Tous les champs doivent être remplis !", "error")
         return redirect("/page_arrive/inscription?error=1")
     
     creation_pers(prenom, nom, nom_utilisateur, mot_passe)
