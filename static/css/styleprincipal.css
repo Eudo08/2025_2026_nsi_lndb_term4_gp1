@@ -135,6 +135,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
 }
+
 .bouton_petit {
     color: var(--paynes-gray);
     text-decoration: none;
@@ -207,4 +208,32 @@ body {
     background-color: var(--button-active-color);
     color: white;
     transform: scale(1.05);
+}
+
+.table{
+    border: thick double #32a1ce;
+    
+}
+
+#error {
+    background-color: #ff4d4d; /* Rouge vif */
+    color: #fff; /* Texte blanc */
+    font-weight: bold;
+    padding: 15px 20px;
+    border-left: 6px solid #b30000;
+    border-radius: 5px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
+    animation: shake 0.4s ease-in-out;
+}
+
+/* Animation légère pour attirer l’attention */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
 }

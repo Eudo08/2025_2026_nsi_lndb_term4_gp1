@@ -24,7 +24,7 @@
         <h1>
           Inscrivez-vous c'est gratuit
         </h1>
-        <p id="error" style="color:red;">Une erreur lol</p>
+        <p id="error">Une erreur lol</p>
 
         <p class="entry">Entrez votre prénom :</p>
         <input type="text" class="input-entry" name="prenom" placeholder="Votre prénom ici">
@@ -69,10 +69,7 @@
     }
   } else {
     if (params.get("error") === "1") {
-      maDiv.innerHTML = "remplissez tous les champs !!"
-    }
-    if (params.get("error") === "2") {
-      maDiv.innerHTML = "IHJDFPO"
+      maDiv.innerHTML = "Remplissez tous les champs !!"
     }
   }
 </script>
