@@ -115,7 +115,7 @@ h1 {
     padding-right: 300px;
 }
 
-body {
+html, body {
     background-color: var(--platinum);
     font-family: Arial, sans-serif;
     color: var(--text-color);
