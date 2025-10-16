@@ -25,9 +25,21 @@ def add_info(colonne, valeur, id_perso):
     cur.execute(sql, (valeur, id_perso))
     con.commit()
 
+def get_colonne (colonne):
+    sql = f"SELECT {colonne} FROM info"
+    cur.execute(sql)
+    rows = cur.fetchall()
+    return [row[0] for row in rows]
+
 def compar_infos_dej (colonne, nb_pers_voulu):
-    cur.execute("SELECT {colonne} FROM info WHERE valeur == ?", )
-    cur.execute(sql, (nb_pers_voulu))
+    valeurs = get_colonne (colonne)
+    resultat = []
+    for i in valeurs :
+        if i == nb_pers_voulu :
+            resultat.append("id")   # ajouter l'id de i --> Pas fini !!!!
+
+    # sql = f"SELECT {colonne} FROM info WHERE nb_personne = ?"
+    # cur.execute(sql, (nb_pers_voulu))
     resultats = cur.fetchall()
     for resultat in resultats:
         print(resultat)
@@ -42,7 +54,9 @@ def compar_infos_dej (colonne, nb_pers_voulu):
 # add_info("nb_personne", 4, id)
 # creation_pers("aze", "Gabriel")
 # add_info("nb_personne", "Gabriel", 2)
-print (compar_infos_dej ("nb_personne", 4))
+
+print (get_colonne ("prenom"))
+# print (compar_infos_dej ("nb_personne", 4))
 
 
 
