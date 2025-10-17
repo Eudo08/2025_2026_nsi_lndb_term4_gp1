@@ -22,7 +22,7 @@ site = Flask(__name__)
 
 
 # Route d'accueil
-@site.route("/")        # page d'accueil
+@site.route("/page_arrive")        # page d'accueil
 def bonjour():
 
     # affichage
