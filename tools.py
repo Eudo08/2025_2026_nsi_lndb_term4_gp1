@@ -46,6 +46,20 @@ def compar_infos_dej (colonne, valeurs):
     ids = [r[0] for r in cur.fetchall()]
     return ids
 
+
+
+
+
+
+# # sql = f"SELECT {colonne} FROM info WHERE nb_personne = ?"
+# # cur.execute(sql, (nb_pers_voulu))
+# resultats = cur.fetchall()
+# for resultat in resultats:
+#     print(resultat)
+# # if nb_pers_voulu == sql:
+# #     return True
+# # else : 
+# #     return False
     
 
 
