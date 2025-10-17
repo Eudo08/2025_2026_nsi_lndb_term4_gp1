@@ -31,92 +31,29 @@ def get_colonne (colonne):
     rows = cur.fetchall()
     return [row[0] for row in rows]
 
-def compar_infos_dej (colonne, nb_pers_voulu):
-    valeurs = get_colonne (colonne)
-    resultat = []
-    for i in valeurs :
-        if i == nb_pers_voulu :
-            resultat.append("id")   # ajouter l'id de i --> Pas fini !!!!
+def compar_infos_dej_essaie (valeurs):
+    cur.execute ("SELECT id FROM info WHERE nb_personne = ?", (valeurs,))
+    ids = [r[0] for r in cur.fetchall()]
+    return ids
 
-    # sql = f"SELECT {colonne} FROM info WHERE nb_personne = ?"
-    # cur.execute(sql, (nb_pers_voulu))
-    resultats = cur.fetchall()
-    for resultat in resultats:
-        print(resultat)
-    # if nb_pers_voulu == sql:
-    #     return True
-    # else : 
-    #     return False
+def compar_infos_dej (colonne, valeurs):
+    colonnes_autorisees = {"nb_personne", "jour", "heure"}
+    if colonne not in colonnes_autorisees:
+        raise ValueError(f"Colonne non autorisée : {colonne}")
+
+    query = f"SELECT id FROM info WHERE {colonne} = ?"
+    cur.execute(query, (valeurs,))
+    ids = [r[0] for r in cur.fetchall()]
+    return ids
+
     
 
 
-# id = creation_pers("abc", "adren")
+# id = creation_pers("vfr", "bgt")
 # add_info("nb_personne", 4, id)
-# creation_pers("aze", "Gabriel")
-# add_info("nb_personne", "Gabriel", 2)
+# id = creation_pers("edodo", "eudo")
+# add_info("nb_personne", 3, id)
 
-print (get_colonne ("prenom"))
-# print (compar_infos_dej ("nb_personne", 4))
+# print (get_colonne ("prenom"))
+print (compar_infos_dej ("nb_personne", 4))
 
-
-
-
-
-
-
-# But de la fonction
-# Mettre à jour une seule colonne (jour, heure ou nb_personne) d’une ligne existante identifiée par son id dans la table info.
-
-# Signature et paramètres
-# def add_info(ligne, info, id_perso):
-
-# ligne : nom de la colonne à mettre à jour; doit appartenir à la liste blanche ALLOWED_COLUMNS.
-
-# info : nouvelle valeur à écrire dans la colonne.
-
-# id_perso : identifiant (id) de la ligne à modifier.
-
-# Liste blanche des colonnes
-# ALLOWED_COLUMNS = {"nb_personne", "jour", "heure"}
-
-# Permet d’empêcher l’injection SQL en s’assurant que seules des colonnes connues et autorisées peuvent être modifiées.
-
-# Si ligne n’appartient pas à cette liste, la fonction lève une ValueError et n’exécute pas de requête SQL.
-
-# Construction de la requête
-
-# La requête est construite en concaténant le nom de colonne validé dans le SQL :
-
-# sql = f"UPDATE info SET {ligne} = ? WHERE id = ?"
-
-# Les valeurs sont fournies via paramètres SQL sécurisés (placeholders) : (info, id_perso).
-
-# Raison : les placeholders ne peuvent remplacer que des valeurs, pas des identifiants (nom de colonne), d’où la nécessité de valider la colonne puis de l’insérer directement dans la chaîne SQL.
-
-# Exécution et engagement
-# cur.execute(sql, (info, id_perso)) exécute la mise à jour.
-
-# con.commit() applique la modification sur la base de données.
-
-# La fonction retourne cur.rowcount (nombre de lignes affectées) pour indiquer si la mise à jour a réussi (généralement 1) ou si aucune ligne n’a été trouvée (0).
-
-# Sécurité et raisons des choix
-# Ne pas permettre que ligne vienne directement de l’utilisateur sans validation : sinon risque d’injection SQL via le nom de colonne.
-
-# Utiliser des placeholders pour les valeurs empêche l’injection SQL au niveau des données.
-
-# Préférer UPDATE plutôt que INSERT quand on veut modifier une ligne existante ; INSERT ajoute une nouvelle ligne et ne prend pas de WHERE.
-
-# Exemples d’utilisation
-# Mettre à jour le nombre de personnes pour l’id 1 :
-
-# ALLOWED_COLUMNS = {"nb_personne", "jour", "heure"}
-
-# def add_info(ligne, info, id_perso):
-#     if ligne not in ALLOWED_COLUMNS:
-#         raise ValueError(f"Nom de colonne invalide : {ligne}")
-
-#     sql = f"UPDATE info SET {ligne} = ? WHERE id = ?"
-#     cur.execute(sql, (info, id_perso))
-#     con.commit()
-#     return cur.rowcount
