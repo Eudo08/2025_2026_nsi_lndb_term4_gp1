@@ -58,7 +58,7 @@ color: #e67e22;
     border-radius: 10px;
     width: 100%; 
     bottom: 0;
-    margin-top: 30px;
+    margin-top: auto;
 }
 
 
@@ -126,7 +126,7 @@ html, body {
 }
 
 .page_container {
-    min-height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -221,6 +221,7 @@ html, body {
 
 .table{
     border: thick double #32a1ce;
+    margin-bottom: 100px;
     
 }
 
