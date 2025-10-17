@@ -46,6 +46,7 @@ color: #e67e22;
     font-size: 20px; 
     border-radius: 10px;
     width: 100%;
+    
 }
 
 .bandeau_bas {
@@ -174,7 +175,7 @@ html, body {
 .bouton_hd_inscr {   
     text-decoration: none;
     position: absolute;
-    top: 20px;           
+    top: 14px;           
     right:50px;         
     color: var(--paynes-gray);
     font-size: 16px;
@@ -190,15 +191,38 @@ html, body {
 }
 
 .bouton_hd_inscr:hover{
-    background-color: var(--button-active-color);
+    background-color: var(--couleur_comple);
     color: white;
     transform: scale(1.05);
 }
+.bouton_retour {
+    text-decoration: none;
+    position: absolute;
+    top: 8px;           
+    left:50px;         
+    color: var(--paynes-gray);
+    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: white; 
+    z-index: 1000;     
 
+}
+
+.bouton_retour:hover {
+    background-color: var(--couleur_comple);
+    color: white;
+    transform: scale(1.05);      
+}
 .bouton_hd_co {
     text-decoration: none;
     position: absolute;
-    top: 20px;           
+    top: 14px;           
     right: 175px;         
     color: var(--paynes-gray);
     font-size: 16px;
@@ -214,7 +238,7 @@ html, body {
 }
 
 .bouton_hd_co:hover {
-    background-color: var(--button-active-color);
+    background-color: var(--couleur_comple);
     color: white;
     transform: scale(1.05);
 }
@@ -246,4 +270,13 @@ html, body {
     60% { transform: translateX(-5px); }
     80% { transform: translateX(5px); }
     100% { transform: translateX(0); }
+}
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
 }
