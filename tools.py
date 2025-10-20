@@ -20,7 +20,7 @@ def creation_pers (nom, prenom):
     con.commit()
     return id
     
-def add_info(colonne, valeur, id_perso):
+def add_info (colonne, valeur, id_perso):
     sql = f"UPDATE info SET {colonne} = ? WHERE id = ?"
     cur.execute(sql, (valeur, id_perso))
     con.commit()
@@ -31,10 +31,20 @@ def get_colonne (colonne):
     rows = cur.fetchall()
     return [row[0] for row in rows]
 
-def compar_infos_dej_essaie (valeurs):
-    cur.execute ("SELECT id FROM info WHERE nb_personne = ?", (valeurs,))
+def compar_username_motdepasse (colonne, valeurs):
+    colonnes_autorisees = {"username", "mot_de_passe"}
+    if colonne not in colonnes_autorisees:
+        raise ValueError(f"Colonne non autorisée : {colonne}")
+
+    query = f"SELECT id FROM info WHERE {colonne} = ?"
+    cur.execute(query, (valeurs,))
     ids = [r[0] for r in cur.fetchall()]
     return ids
+
+# def compar_infos_dej_essaie (valeurs):
+#     cur.execute ("SELECT id FROM info WHERE nb_personne = ?", (valeurs,))
+#     ids = [r[0] for r in cur.fetchall()]
+#     return ids
 
 def compar_infos_dej (colonne, valeurs):
     colonnes_autorisees = {"nb_personne", "jour", "heure"}
@@ -46,7 +56,13 @@ def compar_infos_dej (colonne, valeurs):
     ids = [r[0] for r in cur.fetchall()]
     return ids
 
-
+def transforme_id_in_name (ids): 
+    names = []
+    for i in ids :
+        query = f"SELECT prenom FROM info WHERE id == {i}"
+        cur.execute(query)
+        names = names + [r[0] for r in cur.fetchall()]
+    return names
 
 
 
@@ -69,5 +85,5 @@ def compar_infos_dej (colonne, valeurs):
 # add_info("nb_personne", 3, id)
 
 # print (get_colonne ("prenom"))
-print (compar_infos_dej ("nb_personne", 4))
+print (transforme_id_in_name(compar_infos_dej ("nb_personne", 5)))
 
