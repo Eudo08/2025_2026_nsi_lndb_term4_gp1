@@ -32,10 +32,27 @@ def bonjour():
 def creation_pers (nom, prenom, nom_utilisateur, mot_passe):
 
     cur.execute("INSERT INTO information (nom, prenom, username, mot_de_passe) VALUES(?, ?, ?, ?)", (nom, prenom, nom_utilisateur, mot_passe))
-    # print(nom, prenom, nom_utilisateur, mot_passe)
-
+    id = cur.lastrowid
     con.commit()
-    con.close()
+    return id
+
+def compar_username_motdepasse (colonne, valeurs):
+    colonnes_autorisees = {"username", "mot_de_passe"}
+    if colonne not in colonnes_autorisees:
+        raise ValueError(f"Colonne non autorisée : {colonne}")
+
+    query = f"SELECT id FROM info WHERE {colonne} = ?"
+    cur.execute(query, (valeurs,))
+    ids = [r[0] for r in cur.fetchall()]
+    return ids
+
+
+
+
+
+
+
+
 
 
 
@@ -62,8 +79,15 @@ def submit_and_verify():
     return render_template("connexion.html")
 
 @site.route("/page_arrive/inscription", methods=["GET"])
-def direction_inscription() :
-    return render_template("inscription.html")
+def direction_inscription() :                         # page ou l'on indique notre mot de passe et notre nom ?
+
+    nom_utilisateur = request.form.get("nom_utilisateur")
+    mot_passe = request.form.get("mot_passe")
+
+    if compar_username_motdepasse('username', nom_utilisateur) == compar_username_motdepasse('mot_de_passe', mot_passe) :
+        return render_template("inscription.html")
+    else :
+        pass #message d'erreur
 
 @site.route("/page_arrive/connexion", methods=["GET"])
 def direction_connexion():
@@ -86,14 +110,6 @@ def direction_connexion():
 
     
 #     return render_template("connexion.html", error=error)
-
-
-# def compar_infos_connection (nom_utilisateur, mot_passe):
-#     page = redirect("page_arrive.html")
-#     cur.execute("SELECT username, mot_de_passe FROM information")
-#     if nom_utilisateur == "username" and mot_passe == "mot_de_passe" :
-#         return page
-    
 
 
  
