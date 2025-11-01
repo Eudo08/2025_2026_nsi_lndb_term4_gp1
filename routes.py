@@ -62,6 +62,8 @@ def compar_infos_dej (colonne, valeurs):
     return ids
 
 
+
+
 @site.route("/submit", methods=["POST", "GET"])        # page s'inscrire
 def submit_and_verify():
     
@@ -77,6 +79,7 @@ def submit_and_verify():
     
     return render_template("connexion.html")
 
+
 @site.route("/page_arrive/inscription", methods=["GET"])
 def direction_inscription() :                         # page ou l'on indique notre mot de passe et notre nom ?
 
@@ -87,6 +90,7 @@ def direction_inscription() :                         # page ou l'on indique not
         return render_template("inscription.html")
     else :
         pass #message d'erreur
+
 
 @site.route("/page_arrive/connexion", methods=["GET"])
 def direction_connexion():
