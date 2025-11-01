@@ -41,27 +41,26 @@ def compar_username_motdepasse (colonne, valeurs):
     if colonne not in colonnes_autorisees:
         raise ValueError(f"Colonne non autorisée : {colonne}")
 
-    query = f"SELECT id FROM info WHERE {colonne} = ?"
+    query = f"SELECT id FROM information WHERE {colonne} = ?"
     cur.execute(query, (valeurs,))
     ids = [r[0] for r in cur.fetchall()]
     return ids
 
+def add_info (colonne, valeur, id_perso):
+    sql = f"UPDATE information SET {colonne} = ? WHERE id = ?"
+    cur.execute(sql, (valeur, id_perso))
+    con.commit()
 
+def compar_infos_dej (colonne, valeurs):
+    colonnes_autorisees = {"nb_personne", "jour", "heure"}
+    if colonne not in colonnes_autorisees:
+        raise ValueError(f"Colonne non autorisée : {colonne}")
 
+    query = f"SELECT id FROM information WHERE {colonne} = ?"
+    cur.execute(query, (valeurs,))
+    ids = [r[0] for r in cur.fetchall()]
+    return ids
 
-
-
-
-
-
-
-
-def add_info (collonne, ligne, info):      # Pour ajouter le jour, l'heure et le nombre de personne
-    cur.execute("INSERT INTO information (?) VALUES(?) WHERE id = ?", (collonne, info, ligne))
-
-def compar_infos_dej (nb_personne, jour, heure):
-    pass
-    
 
 @site.route("/submit", methods=["POST", "GET"])        # page s'inscrire
 def submit_and_verify():

@@ -25,7 +25,7 @@ def add_info (colonne, valeur, id_perso):
     cur.execute(sql, (valeur, id_perso))
     con.commit()
 
-def get_colonne (colonne):
+def get_colonne (colonne):             # Pas copier
     sql = f"SELECT {colonne} FROM info"
     cur.execute(sql)
     rows = cur.fetchall()
@@ -56,7 +56,7 @@ def compar_infos_dej (colonne, valeurs):
     ids = [r[0] for r in cur.fetchall()]
     return ids
 
-def transforme_id_in_name (ids): 
+def transforme_id_in_name (ids):         # Pas copier
     names = []
     for i in ids :
         query = f"SELECT prenom FROM info WHERE id == {i}"
