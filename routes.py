@@ -81,38 +81,30 @@ def submit_and_verify():
 
 
 @site.route("/page_arrive/inscription", methods=["GET"])
-def direction_inscription() :                         # page ou l'on indique notre mot de passe et notre nom ?
-
-    nom_utilisateur = request.form.get("nom_utilisateur")
-    mot_passe = request.form.get("mot_passe")
-
-    if compar_username_motdepasse('username', nom_utilisateur) == compar_username_motdepasse('mot_de_passe', mot_passe) :
-        return render_template("inscription.html")
-    else :
-        pass #message d'erreur
+def direction_inscription() :                         
+    return render_template("inscription.html")
 
 
 @site.route("/page_arrive/connexion", methods=["GET"])
 def direction_connexion():
     return render_template("connexion.html")
 
-# @site.route("/page_principalev2", methods=["POST", "GET"])   # page de connection
-# def direction_page_arrive():
+@site.route("/page_principalev2", methods=["POST", "GET"])   # page de connection
+def direction_page_arrive():
     
-#     nom_utilisateur = request.form.get("nom_utilisateur")
-#     mot_passe = request.form.get("mot_passe")
+    nom_utilisateur = request.form.get("nom_utilisateur")
+    mot_passe = request.form.get("mot_passe")
 
-#     if not all([nom_utilisateur, mot_passe]):
-#         return redirect("/page_arrive/connexion?error=1")
+    if not all([nom_utilisateur, mot_passe]):
+        return redirect("/page_arrive/connexion?error=1")
 
-#     redirection = compar_infos_connection(nom_utilisateur, mot_passe)
-#     if redirection:
-#         return redirection
-#     else:
-#         return redirect("/page_arrive/connexion?error=2")
+    if compar_username_motdepasse('username', nom_utilisateur) == compar_username_motdepasse('mot_de_passe', mot_passe) :
+        return    # page suivante
+    else:
+        return redirect("/page_arrive/connexion?error=2")
 
     
-#     return render_template("connexion.html", error=error)
+    return render_template("connexion.html", error=error)    # c'est quoi ?
 
 
  
