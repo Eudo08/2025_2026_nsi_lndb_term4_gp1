@@ -110,9 +110,9 @@ def direction_page_arrive():
 
 
  
-@site.route("/page_principale", methods=["POST", "GET"])
-def direction_principale():
-    return render_template("page_principale.html")
+# @site.route("/page_principale", methods=["POST", "GET"])
+# def direction_principale():
+#     return render_template("page_principale.html")
 
 
 @site.route("/page_confirmation", methods=["POST", "GET"])
