@@ -19,7 +19,9 @@ cur.execute("""
 # Initialisation 
 site = Flask(__name__)
 
-
+@site.route("/")       
+def home():
+    return render_template("page_arrive.html")
 
 # Route d'accueil
 @site.route("/page_arrive")        # page d'accueil
