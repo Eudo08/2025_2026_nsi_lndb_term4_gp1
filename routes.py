@@ -100,8 +100,8 @@ def direction_page_arrive():
     if not all([nom_utilisateur, mot_passe]):
         return redirect("/page_arrive/connexion?error=1")
 
-    if compar_username_motdepasse('username', nom_utilisateur) == compar_username_motdepasse('mot_de_passe', mot_passe) :
-        return    # page suivante
+    elif compar_username_motdepasse('username', nom_utilisateur) == compar_username_motdepasse('mot_de_passe', mot_passe) :
+        return render_template("page_principale.html")
     else:
         return redirect("/page_arrive/connexion?error=2")
 
