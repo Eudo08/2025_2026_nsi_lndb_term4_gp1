@@ -106,7 +106,7 @@ def direction_page_arrive():
         return redirect("/page_arrive/connexion?error=2")
 
     
-    return render_template("connexion.html", error=error)    # c'est quoi ?
+    # return render_template("connexion.html", error=error)    # c'est quoi ?
 
 
  
