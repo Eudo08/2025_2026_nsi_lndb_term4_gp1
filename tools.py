@@ -103,3 +103,26 @@ cur.execute("""
         heure TEXT
     )
 """)
+
+
+    # lundi_heure = request.form.get("lundi_horaires")
+    # mardi_heure = request.form.get("mardi_horaires")
+    # mercredi_heure = request.form.get("mercredi_horaires")
+    # jeudi_heure = request.form.get("jeudi_horaires")
+    # vendredi_heure = request.form.get("vendredi_horaires")
+    # lundi_nb_personne = request.form.get("lundi_nombre_de_personnes")
+    # mardi_nb_personne = request.form.get("mardi_nombre_de_personnes")
+    # mercredi_nb_personne = request.form.get("mercredi_nombre_de_personnes")
+    # jeudi_nb_personne = request.form.get("jeudi_nombre_de_personnes")
+    # vendredi_nb_personne = request.form.get("vendredi_nombre_de_personnes")
+
+# if lundi_heure != "" :
+#    jour = lundi
+# if mardi_heure != "" :
+#    jour = mardi
+# if mercredi_heure != "" :
+#    jour = mercredi
+# if jeudi_heure != "" :
+#    jour = jeudi
+# if vendredi_heure != "" :
+#    jour = vendredi
