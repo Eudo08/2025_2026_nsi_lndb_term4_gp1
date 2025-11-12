@@ -87,3 +87,19 @@ def transforme_id_in_name (ids):         # Pas copier
 # print (get_colonne ("prenom"))
 print (transforme_id_in_name(compar_infos_dej ("nb_personne", 5)))
 
+
+
+
+
+cur.execute("""
+    CREATE TABLE IF NOT EXISTS information (
+        id INTEGER PRIMARY KEY,
+        nom TEXT,
+        prenom TEXT,
+        username TEXT UNIQUE,
+        mot_de_passe TEXT,
+        nb_personne INTEGER,
+        jour TEXT,
+        heure TEXT
+    )
+""")
