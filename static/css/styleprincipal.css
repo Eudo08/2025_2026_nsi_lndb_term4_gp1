@@ -248,6 +248,9 @@ html, body {
     margin-bottom: 100px;
     
 }
+.confirmation{
+    margin-left:500px;
+}
 
 #error {
     background-color: #ff4d4d; 
