@@ -17,22 +17,44 @@
         <div class="bandeau">
             lunch with me
         </div>
+
         <div id="main" class="principal">
             <center>
                 <h1>Vous avez sélectionné</h1>
             </center>
+
             <div class="confirmation">
-                <p>Lundi :</p>
-                <p>Mardi :</p>
-                <p>Mercredi :</p>
-                <p>Jeudi :</p>
-                <p>Vendredi :</p>
+
+                <p>
+                    <strong>Lundi :</strong>
+                    {{ lundi_heure }} — {{ lundi_nb_personne }} personne(s)
+                </p>
+
+                <p>
+                    <strong>Mardi :</strong>
+                    {{ mardi_heure }} — {{ mardi_nb_personne }} personne(s)
+                </p>
+
+                <p>
+                    <strong>Mercredi :</strong>
+                    {{ mercredi_heure }} — {{ mercredi_nb_personne }} personne(s)
+                </p>
+
+                <p>
+                    <strong>Jeudi :</strong>
+                    {{ jeudi_heure }} — {{ jeudi_nb_personne }} personne(s)
+                </p>
+
+                <p>
+                    <strong>Vendredi :</strong>
+                    {{ vendredi_heure }} — {{ vendredi_nb_personne }} personne(s)
+                </p>
+
             </div>
 
         </div>
     </div>
 </body>
-
 </html>
 
 
