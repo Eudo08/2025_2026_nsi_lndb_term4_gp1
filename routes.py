@@ -124,7 +124,18 @@ def direction_page_arrive():
 @site.route("/page_confirmation", methods=["POST", "GET"])
 def direction_confirmation():
     if request.method == "POST":
-        pass
+        
+        lundi_heure = request.form.get("lundi_horaires")
+        mardi_heure = request.form.get("mardi_horaires")
+        mercredi_heure = request.form.get("mercredi_horaires")
+        jeudi_heure = request.form.get("jeudi_horaires")
+        vendredi_heure = request.form.get("vendredi_horaires")
+        lundi_nb_personne = request.form.get("lundi_nombre_de_personnes")
+        mardi_nb_personne = request.form.get("mardi_nombre_de_personnes")
+        mercredi_nb_personne = request.form.get("mercredi_nombre_de_personnes")
+        jeudi_nb_personne = request.form.get("jeudi_nombre_de_personnes")
+        vendredi_nb_personne = request.form.get("vendredi_nombre_de_personnes")
+
     return render_template("confirmation.html",  nb_personne=nb_personne, jour=jour, heure=heure)
 
 
