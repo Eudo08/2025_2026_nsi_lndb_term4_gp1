@@ -91,19 +91,25 @@ def direction_inscription() :
 def direction_connexion():
     return render_template("connexion.html")
 
-@site.route("/page_principalev2", methods=["POST", "GET"])   # page de connection
+@site.route("/page_principalev2", methods=["POST", "GET"])
 def direction_page_arrive():
     
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
 
-    if not all([nom_utilisateur, mot_passe]):
+    if not nom_utilisateur or not mot_passe:
         return redirect("/page_arrive/connexion?error=1")
 
-    elif compar_username_motdepasse('username', nom_utilisateur) == compar_username_motdepasse('mot_de_passe', mot_passe) :
-        return render_template("page_principale.html")
+    ids_username = compar_username_motdepasse("username", nom_utilisateur)
+    ids_password = compar_username_motdepasse("mot_de_passe", mot_passe)
+
+
+    if ids_username and ids_password and ids_username[0] == ids_password[0]:
+        return render_template("page_principale.html") 
+
     else:
-        return redirect("/page_arrive/connexion?error=2")
+        return redirect("/page_arrive/connexion?error=2")  
+
 
     
     # return render_template("connexion.html", error=error)    # c'est quoi ?
