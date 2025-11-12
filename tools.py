@@ -116,6 +116,9 @@ cur.execute("""
     # jeudi_nb_personne = request.form.get("jeudi_nombre_de_personnes")
     # vendredi_nb_personne = request.form.get("vendredi_nombre_de_personnes")
 
+# jours = [lundi_heure, mardi_heure, mercredi_heure, jeudi_heure, vendredi_heure]
+
+# for j in jours :
 # if lundi_heure != "" :
 #    jour = lundi
 # if mardi_heure != "" :
@@ -126,3 +129,6 @@ cur.execute("""
 #    jour = jeudi
 # if vendredi_heure != "" :
 #    jour = vendredi
+
+# else :
+#    
