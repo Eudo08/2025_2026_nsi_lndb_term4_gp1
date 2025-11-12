@@ -123,11 +123,6 @@ def direction_page_arrive():
 
 @site.route("/page_confirmation", methods=["POST", "GET"])
 def direction_confirmation():
-
-    nb_personne = request.form.get("nombre de paersonnes")
-    jour = request.form.get("lundi", "mardi", "mercredi", "jeudi", "vendredi")
-    heure = request.form.get("horaires")
-
     return render_template("confirmation.html")
 
 
