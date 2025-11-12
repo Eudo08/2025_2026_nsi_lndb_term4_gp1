@@ -123,7 +123,9 @@ def direction_page_arrive():
 
 @site.route("/page_confirmation", methods=["POST", "GET"])
 def direction_confirmation():
-    return render_template("confirmation.html")
+    if request.method == "POST":
+        pass
+    return render_template("confirmation.html",  nb_personne=nb_personne, jour=jour, heure=heure)
 
 
 
