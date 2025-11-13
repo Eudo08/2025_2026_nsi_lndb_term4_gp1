@@ -137,6 +137,35 @@ def direction_confirmation():
         jeudi_nb_personne = request.form.get("jeudi_nombre_de_personnes")
         vendredi_nb_personne = request.form.get("vendredi_nombre_de_personnes")
 
+        jours = [lundi_heure, mardi_heure, mercredi_heure, jeudi_heure, vendredi_heure]
+
+        for j in jours :
+
+            if lundi_heure != "" :
+                add_info ("jour", 'lundi', id_perso)
+                add_info ("nb_personne", lundi_nb_personne, id_perso)
+                add_info ("heure", lundi_heure, id_perso)
+
+            if mardi_heure != "" :
+                add_info ("jour", 'mardi', id_perso)
+                add_info ("nb_personne", mardi_nb_personne, id_perso)
+                add_info ("heure", mardi_heure, id_perso)
+
+            if mercredi_heure != "" :
+                add_info ("jour", 'mercredi', id_perso)
+                add_info ("nb_personne", mercredi_nb_personne, id_perso)
+                add_info ("heure", mercredi_heure, id_perso)
+
+            if jeudi_heure != "" :
+                add_info ("jour", 'jeudi', id_perso)
+                add_info ("nb_personne", jeudi_nb_personne, id_perso)
+                add_info ("heure", jeudi_heure, id_perso)
+
+            if vendredi_heure != "" :
+                add_info ("jour", 'vendredi', id_perso)
+                add_info ("nb_personne", vendredi_nb_personne, id_perso)
+                add_info ("heure", vendredi_heure, id_perso)
+            
         return render_template(
             "confirmation.html",
             lundi_heure=lundi_heure,
@@ -150,6 +179,7 @@ def direction_confirmation():
             jeudi_nb_personne=jeudi_nb_personne,
             vendredi_nb_personne=vendredi_nb_personne
         )
+
 
 
 
