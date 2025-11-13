@@ -3,7 +3,15 @@ import sqlite3
 con = sqlite3.connect("info_idividu.db",check_same_thread=False)
 cur = con.cursor()
 
-cur.execute("""
+cur.executescript("""
+    CREATE TABLE IF NOT EXISTS information (
+        id INTEGER PRIMARY KEY,
+        nom TEXT,
+        prenom TEXT,
+        username TEXT UNIQUE,
+        mot_de_passe TEXT
+    );
+
     CREATE TABLE IF NOT EXISTS planning (
         id INTEGER PRIMARY KEY,
         user_id INTEGER,
@@ -11,7 +19,7 @@ cur.execute("""
         heure TEXT,
         nb_personne INTEGER,
         FOREIGN KEY(user_id) REFERENCES information(id)
-        )
+    )
 """)
 
 # Initialisation 
