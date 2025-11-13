@@ -24,6 +24,7 @@ cur.executescript("""
 
 # Initialisation 
 site = Flask(__name__)
+site.secret_key = "JeanPartickDeLaBruyere"
 
 @site.route("/")       
 def home():
