@@ -57,7 +57,7 @@ def compar_username_motdepasse (colonne, valeurs):
     return ids
 
 def add_info (colonne, valeur, id_perso):
-    sql = f"UPDATE information SET {colonne} = ? WHERE id = ?"
+    sql = f"UPDATE planning SET {colonne} = ? WHERE id = ?"
     cur.execute(sql, (valeur, id_perso))
     con.commit()
 
@@ -66,7 +66,7 @@ def compar_infos_dej (colonne, valeurs):
     if colonne not in colonnes_autorisees:
         raise ValueError(f"Colonne non autorisée : {colonne}")
 
-    query = f"SELECT id FROM information WHERE {colonne} = ?"
+    query = f"SELECT id FROM planning WHERE {colonne} = ?"
     cur.execute(query, (valeurs,))
     ids = [r[0] for r in cur.fetchall()]
     return ids
@@ -255,7 +255,8 @@ def direction_confirmation():
 #             vendredi_nb_personne=vendredi_nb_personne
 #         )
 
-
+cur.execute("PRAGMA table_info(information)")
+print(cur.fetchall())
 
 
 
