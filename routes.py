@@ -108,12 +108,21 @@ def direction_connexion():
 
 @site.route("/page_principalev2", methods=["POST", "GET"])
 def direction_page_arrive():
-    
+    if "user_id" in session:
+        return render_template("page_principale.html")
+
+    # Sinon, on traite la connexion
     nom_utilisateur = request.form.get("nom_utilisateur")
     mot_passe = request.form.get("mot_passe")
 
     if not nom_utilisateur or not mot_passe:
         return redirect("/page_arrive/connexion?error=1")
+    
+    # nom_utilisateur = request.form.get("nom_utilisateur")
+    # mot_passe = request.form.get("mot_passe")
+
+    # if not nom_utilisateur or not mot_passe:
+    #     return redirect("/page_arrive/connexion?error=1")
 
     ids_username = compar_username_motdepasse("username", nom_utilisateur)
     ids_password = compar_username_motdepasse("mot_de_passe", mot_passe)
