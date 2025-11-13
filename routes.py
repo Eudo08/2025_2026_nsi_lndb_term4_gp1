@@ -1,19 +1,17 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 import sqlite3
 con = sqlite3.connect("info_idividu.db",check_same_thread=False)
 cur = con.cursor()
 
 cur.execute("""
-    CREATE TABLE IF NOT EXISTS information (
+    CREATE TABLE IF NOT EXISTS planning (
         id INTEGER PRIMARY KEY,
-        nom TEXT,
-        prenom TEXT,
-        username TEXT UNIQUE,
-        mot_de_passe TEXT,
-        nb_personne INTEGER,
+        user_id INTEGER,
         jour TEXT,
-        heure TEXT
-    )
+        heure TEXT,
+        nb_personne INTEGER,
+        FOREIGN KEY(user_id) REFERENCES information(id)
+        )
 """)
 
 # Initialisation 
@@ -31,12 +29,13 @@ def bonjour():
     return render_template("page_arrive.html")
 
 
-def creation_pers (nom, prenom, nom_utilisateur, mot_passe):
-
-    cur.execute("INSERT INTO information (nom, prenom, username, mot_de_passe) VALUES(?, ?, ?, ?)", (nom, prenom, nom_utilisateur, mot_passe))
-    id = cur.lastrowid
+def creation_pers(nom, prenom, nom_utilisateur, mot_passe):
+    cur.execute(
+        "INSERT INTO information (nom, prenom, username, mot_de_passe) VALUES(?, ?, ?, ?)",
+        (nom, prenom, nom_utilisateur, mot_passe)
+    )
     con.commit()
-    return id
+    return cur.lastrowid
 
 def compar_username_motdepasse (colonne, valeurs):
     colonnes_autorisees = {"username", "mot_de_passe"}
@@ -77,7 +76,8 @@ def submit_and_verify():
     if not all([nom, prenom, nom_utilisateur, mot_passe]):
         return redirect("/page_arrive/inscription?error=1")
     
-    creation_pers(prenom, nom, nom_utilisateur, mot_passe)
+    user_id = creation_pers(nom, prenom, nom_utilisateur, mot_passe)
+    session['user_id'] = user_id
     
     return render_template("connexion.html")
 
@@ -105,6 +105,7 @@ def direction_page_arrive():
 
 
     if ids_username and ids_password and ids_username[0] == ids_password[0]:
+        session['user_id'] = ids_username[0]
         return render_template("page_principale.html") 
 
     else:
@@ -123,6 +124,7 @@ def direction_page_arrive():
 
 @site.route("/page_confirmation", methods=["POST", "GET"])
 def direction_confirmation():
+    id_perso = session.get('user_id')
     if request.method == "POST":
         
         lundi_heure = request.form.get("lundi_horaires")
