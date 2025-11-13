@@ -243,11 +243,6 @@ html, body {
     transform: scale(1.05);
 }
 
-.table{
-    border: thick double #32a1ce;
-    margin-bottom: 100px;
-    
-}
 .confirmation{
     margin-left:500px;
 }
@@ -282,4 +277,69 @@ html, body {
   'wght' 400,
   'GRAD' 0,
   'opsz' 24
+}
+
+
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-size: 16px;
+}
+
+thead th {
+    background-color: var(--paynes-gray);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 15px;
+}
+
+tbody th {
+    background-color: var(--columbia-blue);
+    color: var(--text-color);
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 12px;
+    text-align: center;
+}
+
+tr:nth-child(even) td {
+    background-color: var(--platinum);
+}
+
+tr:hover td {
+    background-color: var(--dutch-white);
+    transition: background-color 0.3s;
+}
+
+select.input-menu {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--secondary-color);
+    background-color: #fff;
+    color: var(--text-color);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+select.input-menu:hover {
+    border-color: var(--couleur_comple);
+    transform: scale(1.05);
+}
+
+select.input-menu:focus {
+    outline: none;
+    border-color: var(--paynes-gray);
+    box-shadow: 0 0 5px rgba(79, 109, 122, 0.5);
 }
