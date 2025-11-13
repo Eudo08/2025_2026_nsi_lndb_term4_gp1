@@ -129,66 +129,130 @@ def direction_page_arrive():
 # def direction_principale():
 #     return render_template("page_principale.html")
 
-
+def check_personnes_heure_jours(heure_jour, personnes):
+    if not heure_jour and personnes:
+        return False
+    
+    if heure_jour and not personnes:
+        return False
+   
+    if not heure_jour and not personnes:
+        return None
+   
+    return True
 @site.route("/page_confirmation", methods=["POST", "GET"])
 def direction_confirmation():
     id_perso = session.get('user_id')
+
     if request.method == "POST":
-        
-        lundi_heure = request.form.get("lundi_horaires")
-        mardi_heure = request.form.get("mardi_horaires")
-        mercredi_heure = request.form.get("mercredi_horaires")
-        jeudi_heure = request.form.get("jeudi_horaires")
-        vendredi_heure = request.form.get("vendredi_horaires")
+        jours_donnees = {
+            "lundi": {
+                "heure": request.form.get("lundi_horaires"),
+                "nb": request.form.get("lundi_nombre_de_personnes"),
+            },
+            "mardi": {
+                "heure": request.form.get("mardi_horaires"),
+                "nb": request.form.get("mardi_nombre_de_personnes"),
+            },
+            "mercredi": {
+                "heure": request.form.get("mercredi_horaires"),
+                "nb": request.form.get("mercredi_nombre_de_personnes"),
+            },
+            "jeudi": {
+                "heure": request.form.get("jeudi_horaires"),
+                "nb": request.form.get("jeudi_nombre_de_personnes"),
+            },
+            "vendredi": {
+                "heure": request.form.get("vendredi_horaires"),
+                "nb": request.form.get("vendredi_nombre_de_personnes"),
+            },
+        }
 
-        lundi_nb_personne = request.form.get("lundi_nombre_de_personnes")
-        mardi_nb_personne = request.form.get("mardi_nombre_de_personnes")
-        mercredi_nb_personne = request.form.get("mercredi_nombre_de_personnes")
-        jeudi_nb_personne = request.form.get("jeudi_nombre_de_personnes")
-        vendredi_nb_personne = request.form.get("vendredi_nombre_de_personnes")
+        for jour, infos in jours_donnees.items():
+            if check_personnes_heure_jours(infos["heure"], infos["nb"]) is False:
+                return redirect("/page_principalev2?error=1")
 
-        jours = [lundi_heure, mardi_heure, mercredi_heure, jeudi_heure, vendredi_heure]
+        for jour, infos in jours_donnees.items():
+            if infos["heure"] and infos["nb"]:
+                add_info("jour", jour, id_perso)
+                add_info("nb_personne", infos["nb"], id_perso)
+                add_info("heure", infos["heure"], id_perso)
 
-        for j in jours :
-
-            if lundi_heure != "" :
-                add_info ("jour", 'lundi', id_perso)
-                add_info ("nb_personne", lundi_nb_personne, id_perso)
-                add_info ("heure", lundi_heure, id_perso)
-
-            if mardi_heure != "" :
-                add_info ("jour", 'mardi', id_perso)
-                add_info ("nb_personne", mardi_nb_personne, id_perso)
-                add_info ("heure", mardi_heure, id_perso)
-
-            if mercredi_heure != "" :
-                add_info ("jour", 'mercredi', id_perso)
-                add_info ("nb_personne", mercredi_nb_personne, id_perso)
-                add_info ("heure", mercredi_heure, id_perso)
-
-            if jeudi_heure != "" :
-                add_info ("jour", 'jeudi', id_perso)
-                add_info ("nb_personne", jeudi_nb_personne, id_perso)
-                add_info ("heure", jeudi_heure, id_perso)
-
-            if vendredi_heure != "" :
-                add_info ("jour", 'vendredi', id_perso)
-                add_info ("nb_personne", vendredi_nb_personne, id_perso)
-                add_info ("heure", vendredi_heure, id_perso)
-            
         return render_template(
             "confirmation.html",
-            lundi_heure=lundi_heure,
-            mardi_heure=mardi_heure,
-            mercredi_heure=mercredi_heure,
-            jeudi_heure=jeudi_heure,
-            vendredi_heure=vendredi_heure,
-            lundi_nb_personne=lundi_nb_personne,
-            mardi_nb_personne=mardi_nb_personne,
-            mercredi_nb_personne=mercredi_nb_personne,
-            jeudi_nb_personne=jeudi_nb_personne,
-            vendredi_nb_personne=vendredi_nb_personne
+            **{f"{jour}_heure": infos["heure"] for jour, infos in jours_donnees.items()},
+            **{f"{jour}_nb_personne": infos["nb"] for jour, infos in jours_donnees.items()},
         )
+# @site.route("/page_confirmation", methods=["POST", "GET"])
+# def direction_confirmation():
+#     id_perso = session.get('user_id')
+#     if request.method == "POST":
+
+#         lundi_heure = request.form.get("lundi_horaires")
+#         mardi_heure = request.form.get("mardi_horaires")
+#         mercredi_heure = request.form.get("mercredi_horaires")
+#         jeudi_heure = request.form.get("jeudi_horaires")
+#         vendredi_heure = request.form.get("vendredi_horaires")
+
+#         lundi_nb_personne = request.form.get("lundi_nombre_de_personnes")
+#         mardi_nb_personne = request.form.get("mardi_nombre_de_personnes")
+#         mercredi_nb_personne = request.form.get("mercredi_nombre_de_personnes")
+#         jeudi_nb_personne = request.form.get("jeudi_nombre_de_personnes")
+#         vendredi_nb_personne = request.form.get("vendredi_nombre_de_personnes")
+
+#         if check_personnes_heure_jours(lundi_heure, lundi_nb_personne) == False:
+#             return redirect("/page_principalev2?error=1")
+#         if check_personnes_heure_jours(mardi_heure, mardi_nb_personne) == False:
+#             return redirect("/page_principalev2?error=1")
+#         if check_personnes_heure_jours(mercredi_heure, mercredi_nb_personne) == False:
+#             return redirect("/page_principalev2?error=1")
+#         if check_personnes_heure_jours(jeudi_heure, jeudi_nb_personne) == False:
+#             return redirect("/page_principalev2?error=1")
+#         if check_personnes_heure_jours(vendredi_heure, vendredi_nb_personne) == False:
+#             return redirect("/page_principalev2?error=1")
+        
+#         jours = [lundi_heure, mardi_heure, mercredi_heure, jeudi_heure, vendredi_heure]
+#         nb = [lundi_nb_personne, mardi_nb_personne, mercredi_nb_personne, jeudi_nb_personne, vendredi_nb_personne]
+#         for j in jours :
+
+#             if lundi_heure != "" :
+#                 add_info ("jour", 'lundi', id_perso)
+#                 add_info ("nb_personne", lundi_nb_personne, id_perso)
+#                 add_info ("heure", lundi_heure, id_perso)
+
+#             if mardi_heure != "" :
+#                 add_info ("jour", 'mardi', id_perso)
+#                 add_info ("nb_personne", mardi_nb_personne, id_perso)
+#                 add_info ("heure", mardi_heure, id_perso)
+
+#             if mercredi_heure != "" :
+#                 add_info ("jour", 'mercredi', id_perso)
+#                 add_info ("nb_personne", mercredi_nb_personne, id_perso)
+#                 add_info ("heure", mercredi_heure, id_perso)
+
+#             if jeudi_heure != "" :
+#                 add_info ("jour", 'jeudi', id_perso)
+#                 add_info ("nb_personne", jeudi_nb_personne, id_perso)
+#                 add_info ("heure", jeudi_heure, id_perso)
+
+#             if vendredi_heure != "" :
+#                 add_info ("jour", 'vendredi', id_perso)
+#                 add_info ("nb_personne", vendredi_nb_personne, id_perso)
+#                 add_info ("heure", vendredi_heure, id_perso)
+            
+#         return render_template(
+#             "confirmation.html",
+#             lundi_heure=lundi_heure,
+#             mardi_heure=mardi_heure,
+#             mercredi_heure=mercredi_heure,
+#             jeudi_heure=jeudi_heure,
+#             vendredi_heure=vendredi_heure,
+#             lundi_nb_personne=lundi_nb_personne,
+#             mardi_nb_personne=mardi_nb_personne,
+#             mercredi_nb_personne=mercredi_nb_personne,
+#             jeudi_nb_personne=jeudi_nb_personne,
+#             vendredi_nb_personne=vendredi_nb_personne
+#         )
 
 
 
