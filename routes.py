@@ -56,9 +56,15 @@ def compar_username_motdepasse (colonne, valeurs):
     ids = [r[0] for r in cur.fetchall()]
     return ids
 
-def add_info (colonne, valeur, id_perso):
-    sql = f"UPDATE planning SET {colonne} = ? WHERE id = ?"
-    cur.execute(sql, (valeur, id_perso))
+# def add_info (colonne, valeur, id_perso):
+#     sql = f"UPDATE planning SET {colonne} = ? WHERE id = ?"
+#     cur.execute(sql, (valeur, id_perso))
+#     con.commit()
+def add_planning(user_id, jour, heure, nb_personne):
+    cur.execute("""
+        INSERT INTO planning (user_id, jour, heure, nb_personne)
+        VALUES (?, ?, ?, ?)
+    """, (user_id, jour, heure, nb_personne))
     con.commit()
 
 def compar_infos_dej (colonne, valeurs):
@@ -175,9 +181,7 @@ def direction_confirmation():
 
         for jour, infos in jours_donnees.items():
             if infos["heure"] and infos["nb"]:
-                add_info("jour", jour, id_perso)
-                add_info("nb_personne", infos["nb"], id_perso)
-                add_info("heure", infos["heure"], id_perso)
+                add_planning(id_perso, jour, infos["heure"], infos["nb"])
 
         return render_template(
             "confirmation.html",
