@@ -8,7 +8,7 @@
     - Dossier images:  
          Contien les différentes images pour le contenue du site.  
 - Templates:  
-     Dossier contenant la totalité des fichers qui crrespondes au différnetes parties du site.  
+     Dossier contenant la totalité des fichers qui correspondes au différentes parties du site.  
 - Routes.py:  
      Ficher permettant de lancer le site internet et donc pouvoir accéder au projet.  
 - tools.pty:  
