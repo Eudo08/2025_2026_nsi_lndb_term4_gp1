@@ -21,6 +21,7 @@
             <center>
                 <h1>Vos disponibilités</h1>
                 <form id="form-interet" method="POST" action="/page_confirmation">
+                <p id="error" ;>Une erreur lol</p>
                     <div class="table">
                         <table>
                             <thead>
@@ -103,5 +104,17 @@
             </div>
     </div>
 </body>
-
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const maDiv = document.getElementById('error');
+    if (! params.get('error')) {
+      if (maDiv) {
+        maDiv.style.display = 'none';
+      }
+    } else {
+      if (params.get("error") === "1") {
+        maDiv.innerHTML = "Remplissez tous les champs !!"
+      }
+    }
+  </script>
 </html>
