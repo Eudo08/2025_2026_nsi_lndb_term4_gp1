@@ -217,22 +217,19 @@ def direction_page_final ():
 
         elif liste_jours == liste_heures and liste_heures == liste_nb:
             ids_all_person = liste_jours
-            
-            if infos["nb"] == 2 and len(ids_all_person) >= 3:
-                ids_person.append(ids_all_person.pop(2)) 
-            elif infos["nb"] == 4 and len(ids_all_person) >= 5:
-                ids_person.append(ids_all_person.pop(4)) 
 
-        # elif compar_infos_dej("jour", jour) == compar_infos_dej("heure", infos["heure"]) and \
-        # compar_infos_dej("heure", infos["heure"]) == compar_infos_dej("nb_personne", infos["nb"]) :
-        #     ids_all_person = compar_infos_dej("jour", jour) == compar_infos_dej("heure", infos["heure"]) and \
-        #     compar_infos_dej("heure", infos["heure"]) == compar_infos_dej("nb_personne", infos["nb"])
-        #     if infos["nb"] == 2:
-        #         ids_person =+ ids_all_person.pop(2)
-        #     elif infos["nb"] == 4:
-        #         ids_person =+ ids_all_person.pop(4)
-            
-        else :
+            try:
+
+                if infos["nb"] == 2 and len(ids_all_person) >= 1:
+                    ids_person.append(ids_all_person.pop())
+                    
+                elif infos["nb"] == 4 and len(ids_all_person) >= 3:
+                    ids_person.append(ids_all_person.pop())
+                    ids_person.append(ids_all_person.pop()) 
+                    ids_person.append(ids_all_person.pop())  
+
+            except IndexError:
+                print(f"Erreur: pas assez de personnes...")
             can_eat = False
             break
     
