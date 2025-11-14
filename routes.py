@@ -171,11 +171,12 @@ def direction_confirmation():
         # for jour, infos in jours_donnees.items():
         #     if infos["heure"] and infos["nb"]:
         #         add_planning(id_perso, jour, infos["heure"], infos["nb"])
+        session['planning_temp'] = jours_donnees
 
         return render_template(
             "confirmation.html",
             **{f"{jour}_heure": infos["heure"] for jour, infos in jours_donnees.items()},
-            **{f"{jour}_nb_personne": infos["nb"] for jour, infos in jours_donnees.items()},
+            **{f"{jour}_nb_personne": infos["nb"] for jour, infos in jours_donnees.items()}, jours=jours_donnees
         )
 
 
@@ -183,28 +184,8 @@ def direction_confirmation():
 @site.route("/page_finale", methods=["POST", "GET"])
 def direction_page_final ():
     id_perso = session.get('user_id')
-    jours_donnees = {
-        "lundi": {
-            "heure": request.form.get("lundi_horaires"),
-            "nb": request.form.get("lundi_nombre_de_personnes"),
-        },
-        "mardi": {
-            "heure": request.form.get("mardi_horaires"),
-            "nb": request.form.get("mardi_nombre_de_personnes"),
-        },
-        "mercredi": {
-            "heure": request.form.get("mercredi_horaires"),
-            "nb": request.form.get("mercredi_nombre_de_personnes"),
-        },
-        "jeudi": {
-            "heure": request.form.get("jeudi_horaires"),
-            "nb": request.form.get("jeudi_nombre_de_personnes"),
-        },
-        "vendredi": {
-            "heure": request.form.get("vendredi_horaires"),
-            "nb": request.form.get("vendredi_nombre_de_personnes"),
-        },
-    }
+
+    jours_donnees = session.get("planning_temp", {})
 
     # for jour, infos in jours_donnees.items():
     #     if check_personnes_heure_jours(infos["heure"], infos["nb"]) is False:
@@ -213,7 +194,8 @@ def direction_page_final ():
     for jour, infos in jours_donnees.items():
         if infos["heure"] and infos["nb"]:
             add_planning(id_perso, jour, infos["heure"], infos["nb"])
-
+            
+    session.pop("planning_temp", None)
     return render_template("page_finale.html")
 
 # Exécution
