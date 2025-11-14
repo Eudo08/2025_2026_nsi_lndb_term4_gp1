@@ -72,6 +72,11 @@ def compar_infos_dej (colonne, valeurs):
     ids = [r[0] for r in cur.fetchall()]
     return ids
 
+def select_info_perso (id):
+    cur.execute("SELECT prenom, nom FROM information WHERE id = ?", (id,))
+    personne = cur.fetchone()
+    return personne
+
 def check_personnes_heure_jours(heure_jour, personnes):
     if not heure_jour and personnes:
         return False
@@ -187,6 +192,7 @@ def direction_confirmation():
 def direction_page_final ():
     id_perso = session.get('user_id')
     can_eat = True
+    ids_person = []
 
     jours_donnees = session.get("planning_temp", {})
 
@@ -208,10 +214,16 @@ def direction_page_final ():
                 
         elif compar_infos_dej("jour", jour) == compar_infos_dej("heure", infos["heure"]) and \
         compar_infos_dej("heure", infos["heure"]) == compar_infos_dej("nb_personne", infos["nb"]) :
+            ids_all_person = compar_infos_dej("jour", jour) == compar_infos_dej("heure", infos["heure"]) and \
+            compar_infos_dej("heure", infos["heure"]) == compar_infos_dej("nb_personne", infos["nb"])
             if infos["nb"] == 2:
-                return id   # que 2
+                ids_person = ids_all_person.pop(2)
             elif infos["nb"] == 4:
-                return id   # que 4
+                ids_person = ids_all_person.pop(4)
+            
+        else :
+            can_eat = False
+            break
 
 # retourner le nom + prenom en fonction de id
 
