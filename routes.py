@@ -194,9 +194,14 @@ def direction_page_final ():
     for jour, infos in jours_donnees.items():
         if infos["heure"] and infos["nb"]:
             add_planning(id_perso, jour, infos["heure"], infos["nb"])
-            
+
     session.pop("planning_temp", None)
     return render_template("page_finale.html")
+
+
+@site.route("/retour_page_principale", methods=["POST", "GET"])
+def bouton_retour ():
+    return render_template ("page_principale.html")
 
 # Exécution
 if __name__ == '__main__':
