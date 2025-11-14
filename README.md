@@ -21,6 +21,6 @@ Ce projet est un site internet qui a pour but de rassembler des personnes autour
 - Installer Flask
 ## Modules et fonctions:
 ## Créateurs:
-Eudoxie, Marinade, Tristan
+Eudoxie, Marinade, Tristan&Yseute
 ## Statut:
 ALpha disponible.
