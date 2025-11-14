@@ -168,9 +168,9 @@ def direction_confirmation():
             if check_personnes_heure_jours(infos["heure"], infos["nb"]) is False:
                 return redirect("/page_principalev2?error=1")
 
-        for jour, infos in jours_donnees.items():
-            if infos["heure"] and infos["nb"]:
-                add_planning(id_perso, jour, infos["heure"], infos["nb"])
+        # for jour, infos in jours_donnees.items():
+        #     if infos["heure"] and infos["nb"]:
+        #         add_planning(id_perso, jour, infos["heure"], infos["nb"])
 
         return render_template(
             "confirmation.html",
@@ -178,11 +178,42 @@ def direction_confirmation():
             **{f"{jour}_nb_personne": infos["nb"] for jour, infos in jours_donnees.items()},
         )
 
-cur.execute("PRAGMA table_info(information)")
-print(cur.fetchall())
+
 
 @site.route("/page_finale", methods=["POST", "GET"])
 def direction_page_final ():
+    id_perso = session.get('user_id')
+    jours_donnees = {
+        "lundi": {
+            "heure": request.form.get("lundi_horaires"),
+            "nb": request.form.get("lundi_nombre_de_personnes"),
+        },
+        "mardi": {
+            "heure": request.form.get("mardi_horaires"),
+            "nb": request.form.get("mardi_nombre_de_personnes"),
+        },
+        "mercredi": {
+            "heure": request.form.get("mercredi_horaires"),
+            "nb": request.form.get("mercredi_nombre_de_personnes"),
+        },
+        "jeudi": {
+            "heure": request.form.get("jeudi_horaires"),
+            "nb": request.form.get("jeudi_nombre_de_personnes"),
+        },
+        "vendredi": {
+            "heure": request.form.get("vendredi_horaires"),
+            "nb": request.form.get("vendredi_nombre_de_personnes"),
+        },
+    }
+
+    # for jour, infos in jours_donnees.items():
+    #     if check_personnes_heure_jours(infos["heure"], infos["nb"]) is False:
+    #         return redirect("/page_principalev2?error=1")
+
+    for jour, infos in jours_donnees.items():
+        if infos["heure"] and infos["nb"]:
+            add_planning(id_perso, jour, infos["heure"], infos["nb"])
+
     return render_template("page_finale.html")
 
 # Exécution
