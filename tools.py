@@ -151,19 +151,3 @@ cur.execute("""
 # add_info ("jour", jour, id_perso)
 # add_info ("nb_personne", jour_nb_personne, id_perso)
 # add_info ("heure", heure, id_perso)
-
-
-
-
-
-# def compar_name_user_other (colonne, valeurs):
-#     colonnes_autorisees = {"username", "mot_de_passe", "nom", "prenom"}
-#     if colonne not in colonnes_autorisees:
-#         raise ValueError(f"Colonne non autorisée : {colonne}")
-    
-#     for i in valeurs :
-#         query = f"SELECT all FROM information WHERE {colonne} = ?", (i,)
-#         cur.execute(query)
-#     pass
-#     cur.execute("SELECT * FROM scores")
-
