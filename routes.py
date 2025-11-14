@@ -181,7 +181,9 @@ def direction_confirmation():
 cur.execute("PRAGMA table_info(information)")
 print(cur.fetchall())
 
-
+@site.route("/page_finale", methods=["POST", "GET"])
+def direction_page_final ():
+    return render_template("page_finale.html")
 
 # Exécution
 if __name__ == '__main__':
