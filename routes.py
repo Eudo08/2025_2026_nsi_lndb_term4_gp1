@@ -193,6 +193,7 @@ def direction_page_final ():
     id_perso = session.get('user_id')
     can_eat = True
     ids_person = []
+    person = []
 
     jours_donnees = session.get("planning_temp", {})
 
@@ -206,29 +207,41 @@ def direction_page_final ():
 
     for jour, infos in jours_donnees.items():
 
-        if compar_infos_dej("jour", jour) != [] or \
-        compar_infos_dej("heure", infos["heure"]) != [] or \
-        compar_infos_dej("nb_personne", infos["nb"]) != []:
+        liste_jours = compar_infos_dej("jour", jour)
+        liste_heures = compar_infos_dej("heure", infos["heure"])
+        liste_nb = compar_infos_dej("nb_personne", infos["nb"])
+
+        if liste_jours != [] or liste_heures != [] or liste_nb != []:
             can_eat = False
             break
-                
-        elif compar_infos_dej("jour", jour) == compar_infos_dej("heure", infos["heure"]) and \
-        compar_infos_dej("heure", infos["heure"]) == compar_infos_dej("nb_personne", infos["nb"]) :
-            ids_all_person = compar_infos_dej("jour", jour) == compar_infos_dej("heure", infos["heure"]) and \
-            compar_infos_dej("heure", infos["heure"]) == compar_infos_dej("nb_personne", infos["nb"])
-            if infos["nb"] == 2:
-                ids_person = ids_all_person.pop(2)
-            elif infos["nb"] == 4:
-                ids_person = ids_all_person.pop(4)
+
+        elif liste_jours == liste_heures and liste_heures == liste_nb:
+            ids_all_person = liste_jours
+            
+            if infos["nb"] == 2 and len(ids_all_person) >= 3:
+                ids_person.append(ids_all_person.pop(2)) 
+            elif infos["nb"] == 4 and len(ids_all_person) >= 5:
+                ids_person.append(ids_all_person.pop(4)) 
+
+        # elif compar_infos_dej("jour", jour) == compar_infos_dej("heure", infos["heure"]) and \
+        # compar_infos_dej("heure", infos["heure"]) == compar_infos_dej("nb_personne", infos["nb"]) :
+        #     ids_all_person = compar_infos_dej("jour", jour) == compar_infos_dej("heure", infos["heure"]) and \
+        #     compar_infos_dej("heure", infos["heure"]) == compar_infos_dej("nb_personne", infos["nb"])
+        #     if infos["nb"] == 2:
+        #         ids_person =+ ids_all_person.pop(2)
+        #     elif infos["nb"] == 4:
+        #         ids_person =+ ids_all_person.pop(4)
             
         else :
             can_eat = False
             break
-
-# retourner le nom + prenom en fonction de id
-
+    
+    for p in ids_person:
+        person.append(select_info_perso(p))
+    
     session.pop("planning_temp", None)
-    return render_template("page_finale.html")
+    print (person)
+    return render_template("page_finale.html", person=person)
 
 
 @site.route("/retour_page_principale", methods=["POST", "GET"])
