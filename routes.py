@@ -167,7 +167,9 @@ def direction_confirmation():
         for jour, infos in jours_donnees.items():
             if check_personnes_heure_jours(infos["heure"], infos["nb"]) is False:
                 return redirect("/page_principalev2?error=1")
-
+        
+        if check_personnes_heure_jours(infos["heure"], infos["nb"]) is None:
+            infos["nb"] = "aucunes"
         # for jour, infos in jours_donnees.items():
         #     if infos["heure"] and infos["nb"]:
         #         add_planning(id_perso, jour, infos["heure"], infos["nb"])
