@@ -184,6 +184,7 @@ def direction_confirmation():
 @site.route("/page_finale", methods=["POST", "GET"])
 def direction_page_final ():
     id_perso = session.get('user_id')
+    can_eat = True
 
     jours_donnees = session.get("planning_temp", {})
 
@@ -194,6 +195,23 @@ def direction_page_final ():
     for jour, infos in jours_donnees.items():
         if infos["heure"] and infos["nb"]:
             add_planning(id_perso, jour, infos["heure"], infos["nb"])
+
+    for jour, infos in jours_donnees.items():
+
+        if compar_infos_dej("jour", jour) != [] or \
+        compar_infos_dej("heure", infos["heure"]) != [] or \
+        compar_infos_dej("nb_personne", infos["nb"]) != []:
+            can_eat = False
+            break
+                
+        elif compar_infos_dej("jour", jour) == compar_infos_dej("heure", infos["heure"]) and \
+        compar_infos_dej("heure", infos["heure"]) == compar_infos_dej("nb_personne", infos["nb"]) :
+            if infos["nb"] == 2:
+                return id   # que 2
+            elif infos["nb"] == 4:
+                return id   # que 4
+
+# retourner le nom + prenom en fonction de id
 
     session.pop("planning_temp", None)
     return render_template("page_finale.html")
