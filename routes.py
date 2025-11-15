@@ -226,12 +226,17 @@ def direction_page_final ():
                 elif infos["nb"] == 4 and len(ids_all_person) >= 3:
                     ids_person.append(ids_all_person.pop())
                     ids_person.append(ids_all_person.pop()) 
-                    ids_person.append(ids_all_person.pop())  
+                    ids_person.append(ids_all_person.pop())
 
-            except IndexError:
-                print(f"Erreur: pas assez de personnes...")
-            can_eat = False
-            break
+                elif not (infos["nb"] == 2 or infos["nb"] == 4):
+                    pass 
+                else:
+                    raise IndexError("Pas assez de personnes disponibles")
+
+            except IndexError:              # Ajouter un message signalant qu'il n'y a pas assez
+                print(f"Erreur: pas assez de personnes...")       # de personne inscrite 
+                can_eat = False
+                break
     
     for p in ids_person:
         person.append(select_info_perso(p))
