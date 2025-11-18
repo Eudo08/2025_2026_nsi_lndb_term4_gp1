@@ -170,11 +170,14 @@ def direction_confirmation():
         }
 
         for jour, infos in jours_donnees.items():
-            if check_personnes_heure_jours(infos["heure"], infos["nb"]) is False:
+            valid = check_personnes_heure_jours(infos["heure"], infos["nb"])
+
+            if valid is False:
                 return redirect("/page_principalev2?error=1")
-        
-        if check_personnes_heure_jours(infos["heure"], infos["nb"]) is None:
-            infos["nb"] = "aucunes"
+
+            if valid is None:
+                infos["nb"] = "aucune sélection"
+
         # for jour, infos in jours_donnees.items():
         #     if infos["heure"] and infos["nb"]:
         #         add_planning(id_perso, jour, infos["heure"], infos["nb"])
@@ -232,11 +235,12 @@ def direction_page_final ():
                     pass 
                 else:
                     raise IndexError("Pas assez de personnes disponibles")
+                    
 
             except IndexError:              # Ajouter un message signalant qu'il n'y a pas assez
                 print(f"Erreur: pas assez de personnes...")       # de personne inscrite 
                 can_eat = False
-                break
+                return redirect("/page_confirmation?error=3")
     
     for p in ids_person:
         person.append(select_info_perso(p))

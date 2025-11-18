@@ -22,33 +22,54 @@
             <center>
                 <h1>Vous avez sélectionné</h1>
             </center>
-
+            <p id="error" ;>Une erreur lol</p>
 
             <div class="confirmation">
 
                 <p>
                     <strong>Lundi :</strong>
-                    {{ lundi_heure }} — {{ lundi_nb_personne }} personnes
+                    {% if lundi_nb_personne == "aucune sélection" %}
+                        {{ lundi_heure }} — aucune sélection
+                    {% else %}
+                        {{ lundi_heure }} — {{ lundi_nb_personne }} personnes
+                    {% endif %}
+
                 </p>
 
                 <p>
-                    <strong>Mardi :</strong>
-                    {{ mardi_heure }} — {{ mardi_nb_personne }} personnes
+                    <strong>Mardi :</strong>                   
+                    {% if mardi_nb_personne == "aucune sélection" %}
+                        {{ mardi_heure }} — aucune sélection
+                    {% else %}
+                        {{ mardi_heure }} — {{ mardi_nb_personne }} personnes
+                    {% endif %}
                 </p>
 
                 <p>
                     <strong>Mercredi :</strong>
-                    {{ mercredi_heure }} — {{ mercredi_nb_personne }} personnes
+                    {% if mercredi_nb_personne == "aucune sélection" %}
+                        {{ mercredi_heure }} — aucune sélection
+                    {% else %}
+                        {{ mercredi_heure }} — {{ mercredi_nb_personne }} personnes
+                    {% endif %}
                 </p>
 
                 <p>
                     <strong>Jeudi :</strong>
-                    {{ jeudi_heure }} — {{ jeudi_nb_personne }} personnes
+                    {% if jeudi_nb_personne == "aucune sélection" %}
+                        {{ jeudi_heure }} — aucune sélection
+                    {% else %}
+                        {{ jeudi_heure }} — {{ jeudi_nb_personne }} personnes
+                    {% endif %}
                 </p>
 
                 <p>
                     <strong>Vendredi :</strong>
-                    {{ vendredi_heure }} — {{ vendredi_nb_personne }} personnes
+                    {% if vendredi_nb_personne == "aucune sélection" %}
+                        {{ vendredi_heure }} — aucune sélection
+                    {% else %}
+                        {{ vendredi_heure }} — {{ vendredi_nb_personne }} personnes
+                    {% endif %}
                 </p>
                 <br>
                 <a href="/retour_page_principale" class="bouton">Annuler</a>
@@ -62,6 +83,19 @@
         </div>
     </div>
 </body>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const maDiv = document.getElementById('error');
+    if (! params.get('error')) {
+      if (maDiv) {
+        maDiv.style.display = 'none';
+      }
+    } else {
+      if (params.get("error") === "3") {
+        maDiv.innerHTML = "Pas assez de personnes disponibles"
+      }
+    }
+  </script>
 </html>
 
 
