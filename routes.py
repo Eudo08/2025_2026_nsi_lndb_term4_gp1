@@ -188,7 +188,8 @@ def direction_confirmation():
             **{f"{jour}_heure": infos["heure"] for jour, infos in jours_donnees.items()},
             **{f"{jour}_nb_personne": infos["nb"] for jour, infos in jours_donnees.items()}, jours=jours_donnees
         )
-
+    error = request.args.get("error")
+    return render_template("confirmation.html", erreur=error)
 
 
 @site.route("/page_finale", methods=["POST", "GET"])
