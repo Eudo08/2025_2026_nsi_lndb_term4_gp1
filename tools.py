@@ -151,3 +151,38 @@ cur.execute("""
 # add_info ("jour", jour, id_perso)
 # add_info ("nb_personne", jour_nb_personne, id_perso)
 # add_info ("heure", heure, id_perso)
+
+
+    #     if liste_jours == [] or liste_heures == [] or liste_nb == []:
+    #         can_eat = False
+    #         break
+
+    #     if liste_jours == liste_heures and liste_heures == liste_nb:
+    #         ids_all_person = liste_jours
+
+    #         try:
+
+    #             if infos["nb"] == 2 and len(ids_all_person) >= 1:
+    #                 ids_person.append(ids_all_person.pop())
+                    
+    #             elif infos["nb"] == 4 and len(ids_all_person) >= 3:
+    #                 ids_person.append(ids_all_person.pop())
+    #                 ids_person.append(ids_all_person.pop()) 
+    #                 ids_person.append(ids_all_person.pop())
+
+    #             elif not (infos["nb"] == 2 or infos["nb"] == 4):
+    #                 pass 
+    #             else:
+    #                 raise IndexError("Pas assez de personnes disponibles")
+                    
+
+    #         except IndexError:
+    #             can_eat = False
+    #             return redirect("/page_confirmation?error=3")
+
+    # if not can_eat:
+    #     return redirect("/page_confirmation?error=3")
+    
+    # for p in ids_person:
+    #     person.append(select_info_perso(p))
+    
