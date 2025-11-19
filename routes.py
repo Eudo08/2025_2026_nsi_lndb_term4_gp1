@@ -21,53 +21,6 @@ cur.executescript("""
         FOREIGN KEY(user_id) REFERENCES information(id)
     )
 """)
-import random
-
-# ------------------------------
-# GÉNÉRATION ALÉATOIRE DES PLANNINGS
-# ------------------------------
-
-jours = ["lundi", "mardi", "mercredi", "jeudi", "vendredi"]
-heures = ["12h10", "13h10"]
-nb_possibles = [2, 4]
-
-# Récupère tous les IDs des personnes créées
-cur.execute("SELECT id FROM information")
-ids_personnes = [row[0] for row in cur.fetchall()]
-
-for pid in ids_personnes:
-    for jour in jours:
-        # 50% de chance de ne rien sélectionner ce jour-là
-        if random.choice([True, False]):
-            heure = random.choice(heures)
-            nb = random.choice(nb_possibles)
-
-            cur.execute("""
-                INSERT INTO planning (user_id, jour, heure, nb_personne)
-                VALUES (?, ?, ?, ?)
-            """, (pid, jour, heure, nb))
-
-# On sauvegarde en base
-con.commit()
-print("Planning aléatoire généré pour les 30 personnes ✔️")
-
-prenoms = ["Emma", "Lucas", "Léa", "Noah", "Chloé", "Louis", "Mila", "Arthur", "Inès", "Hugo",
-           "Sarah", "Jules", "Nina", "Léo", "Anna", "Adam", "Lina", "Tom", "Manon", "Oscar",
-           "Zoé", "Théo", "Élise", "Raphaël", "Camille", "Sacha", "Lola", "Gabriel", "Iris", "Nathan"]
-
-noms = ["Martin", "Durand", "Bernard", "Thomas", "Petit", "Robert", "Richard", "Moreau", "Simon", "Laurent",
-        "Michel", "Garcia", "Roger", "Roche", "David", "Fontaine", "Chevalier", "Weber", "Aubert", "Dupont",
-        "Perrin", "Meyer", "Fournier", "Lemoine", "Renaud", "Boyer", "Blanc", "Gonzalez", "Guillot", "Renard"]
-
-for i in range(30):
-    username = (prenoms[i] + noms[i]).lower()  # username auto
-    mot_de_passe = "1234"  # mot de passe simple
-    cur.execute(
-        "INSERT OR IGNORE INTO information (nom, prenom, username, mot_de_passe) VALUES (?, ?, ?, ?)",
-        (noms[i], prenoms[i], username, mot_de_passe)
-    )
-
-con.commit()
 
 
 # Initialisation 
