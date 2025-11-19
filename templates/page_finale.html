@@ -26,8 +26,20 @@
             <center>
                 <h1>Vos repas</h1>
             </center>
-            <p>vous êtes matché avec {{person}}</p>
-            
+            <!-- <p>vous êtes matché avec {{person}}</p> -->
+        {% for jour, personnes in personnes_par_jour.items() %}
+            <h3>{{ jour|capitalize }}</h3>
+
+            {% if personnes %}
+                <ul>
+                {% for p in personnes %}
+                    <li>{{ p[0] }} {{ p[1] }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucune sélection</p>
+            {% endif %}
+        {% endfor %}
         </div>
         <div class="footer-bonnbouf">
             <h3>📞 Contact</h3>

@@ -247,7 +247,13 @@ def direction_page_final():
         liste_jours = compar_infos_dej("jour", jour)
         liste_heures = compar_infos_dej("heure", heure)
         liste_nb = compar_infos_dej("nb_personne", nb)
-
+        print("--------- DEBUG ---------")
+        print("Jour :", jour)
+        print("Heure :", heure)
+        print("Nombre :", nb)
+        print("Liste jours :", liste_jours)
+        print("Liste heures :", liste_heures)
+        print("Liste nb :", liste_nb)
         # Si une liste est vide → incohérence
         if not liste_jours or not liste_heures or not liste_nb:
             return redirect("/page_confirmation?error=2")
