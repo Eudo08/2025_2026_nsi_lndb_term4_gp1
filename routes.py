@@ -554,6 +554,10 @@ def get_associations(user_id):
     cur.execute(query, (user_id,))
     result = cur.fetchall()
     con.close()
+
+    print("===== DEBUG ASSOCIATIONS =====")
+    print("User ID:", user_id)
+    print("Résultats bruts de la DB:", result)
     personnes_par_jour = {
         "lundi": [],
         "mardi": [],
@@ -563,10 +567,13 @@ def get_associations(user_id):
     }
 
     for jour, pid in result:
+        print(f"Traitement: jour={jour}, pid={pid}")
         personne = select_info_perso(pid)
+        print(f"Info personne récupérée: {personne}")
         if personne:
             personnes_par_jour[jour].append(personne)
-
+    print("Dictionnaire final:", personnes_par_jour)
+    print("==============================")
     return personnes_par_jour
 
 @site.route("/page_groupes", methods=["GET"])
