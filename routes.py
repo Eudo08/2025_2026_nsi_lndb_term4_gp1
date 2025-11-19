@@ -94,6 +94,20 @@ def check_personnes_heure_jours(heure_jour, personnes):
    
     return True
 
+# Dans votre fichier de gestion de base de données (ex: db_utils.py)
+
+def mark_as_booked(person_id, jour, heure):
+    sql = """
+    UPDATE planning
+    SET is_booked = 1
+    WHERE id_perso = ? AND jour = ? AND heure = ?
+    """
+    cur.execute(sql, (person_id, jour, heure))
+    con.commit()
+    con.close()
+    
+    return True
+
 
 
 @site.route("/submit", methods=["POST", "GET"])      
@@ -206,55 +220,68 @@ def direction_page_final ():
 
     jours_donnees = session.get("planning_temp", {})
 
-    # for jour, infos in jours_donnees.items():
-    #     if check_personnes_heure_jours(infos["heure"], infos["nb"]) is False:
-    #         return redirect("/page_principalev2?error=1")
+   # for jour, infos in jours_donnees.items():
+   #    if check_personnes_heure_jours(infos["heure"], infos["nb"]) is False:
+   #       return redirect("/page_principalev2?error=1")
 
     for jour, infos in jours_donnees.items():
-        if infos["heure"] and infos["nb"]:
-            add_planning(id_perso, jour, infos["heure"], infos["nb"])
-
-    for jour, infos in jours_donnees.items():
+        
+        heure = infos["heure"]
+        nb = int(infos["nb"])
+        needed = nb - 1
 
         liste_jours = compar_infos_dej("jour", jour)
         liste_heures = compar_infos_dej("heure", infos["heure"])
         liste_nb = compar_infos_dej("nb_personne", infos["nb"])
 
-        if liste_jours != [] or liste_heures != [] or liste_nb != []:
-            can_eat = False
-            break
+        print("DEBUG", jour, liste_jours, liste_heures, liste_nb)
 
-        elif liste_jours == liste_heures and liste_heures == liste_nb:
-            ids_all_person = liste_jours
+        if not liste_jours or not liste_heures or not liste_nb:
+            return redirect("/page_confirmation?error=2")
 
-            try:
+        if set(liste_jours) == set(liste_heures) == set(liste_nb):
+            return redirect("/page_confirmation?error=2")
+        
+        ids_all_person = liste_jours.copy()
+        if id_perso in ids_all_person:
+            ids_all_person.remove(id_perso)
 
-                if infos["nb"] == 2 and len(ids_all_person) >= 1:
-                    ids_person.append(ids_all_person.pop())
-                    
-                elif infos["nb"] == 4 and len(ids_all_person) >= 3:
-                    ids_person.append(ids_all_person.pop())
-                    ids_person.append(ids_all_person.pop()) 
-                    ids_person.append(ids_all_person.pop())
+        if len(ids_all_person) < needed:
+            return redirect("/page_confirmation?error=3")
+        ids_person.extend(ids_all_person[:needed])
 
-                elif not (infos["nb"] == 2 or infos["nb"] == 4):
-                    pass 
-                else:
-                    raise IndexError("Pas assez de personnes disponibles")
-                    
+            # try:
 
-            except IndexError:              # Ajouter un message signalant qu'il n'y a pas assez
-                print(f"Erreur: pas assez de personnes...")       # de personne inscrite 
-                can_eat = False
-                return redirect("/page_confirmation?error=3")
+            #     if infos["nb"] == 2 and len(ids_all_person) >= 1:
+            #         ids_person.append(ids_all_person.pop())
+                
+            #     elif infos["nb"] == 4 and len(ids_all_person) >= 3:
+            #         ids_person.append(ids_all_person.pop())
+            #         ids_person.append(ids_all_person.pop()) 
+            #         ids_person.append(ids_all_person.pop())
+
+            #     elif not (infos["nb"] == 2 or infos["nb"] == 4):
+            #         pass 
+            #     else:
+            #         raise IndexError("Pas assez de personnes disponibles")
+                
+
+            # except IndexError:
+            #     can_eat = False
+            #     return redirect("/page_confirmation?error=3")
+            
+    for jour, infos in jours_donnees.items():
+        add_planning(id_perso, jour, infos["heure"], infos["nb"])
+
+    # if not can_eat:
+    #     return redirect("/page_confirmation?error=3")
     
     for p in ids_person:
         person.append(select_info_perso(p))
-    
+   
     session.pop("planning_temp", None)
     print (person)
     return render_template("page_finale.html", person=person)
-
 
 @site.route("/retour_page_principale", methods=["POST", "GET"])
 def bouton_retour ():
