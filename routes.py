@@ -108,6 +108,55 @@ def mark_as_booked(person_id, jour, heure):
     
     return True
 
+def get_db_connection():
+    # Remplacez ceci par votre propre logique de connexion
+    con = sqlite3.connect('info_idividu.db')
+    con.row_factory = sqlite3.Row
+    return con
+
+def trouver_personnes_correspondantes(jour, heure, nb):
+    """
+    Trouve les ID des personnes ayant fait le même choix (jour, heure, nb).
+    Renvoie une liste d'IDs.
+    """
+    
+    # La requête SQL qui filtre sur les TROIS critères en même temps
+    query = """
+        SELECT user_id 
+        FROM planning 
+        WHERE jour = ? 
+          AND heure = ? 
+          AND nb_personne = ?
+    """
+    # Note: On utilise des '?' (ou '%s' pour PostgreSQL) 
+    # pour passer les arguments en toute sécurité (évite l'injection SQL)
+    
+    con = None
+    ids_trouves = []
+    
+    try:
+        con = get_db_connection()
+        
+        # Exécute la requête en passant les variables
+        cur.execute(query, (jour, heure, nb))
+        
+        # Récupère tous les résultats
+        resultats = cur.fetchall() # ex: [(12,), (25,), (31,)]
+        
+        # Transforme la liste de tuples en une liste simple d'IDs
+        # C'est ce que [row[0] for row in resultats] signifie.
+        ids_trouves = [row[0] for row in resultats]
+        
+    except Exception as e:
+        print(f"Erreur lors de la recherche en base de données : {e}")
+        # Gérez l'erreur comme il se doit
+        
+    finally:
+        if con:
+            con.close()
+            
+    return ids_trouves
+
 
 
 @site.route("/submit", methods=["POST", "GET"])      
@@ -244,26 +293,31 @@ def direction_page_final():
         needed = nb - 1   # ex : 4 → 3 personnes
 
         # Recherche des autres personnes
-        liste_jours = compar_infos_dej("jour", jour)
-        liste_heures = compar_infos_dej("heure", heure)
-        liste_nb = compar_infos_dej("nb_personne", nb)
+        # liste_jours = compar_infos_dej("jour", jour)
+        # liste_heures = compar_infos_dej("heure", heure)
+        # liste_nb = compar_infos_dej("nb_personne", nb)
+
+        ids_all_person = trouver_personnes_correspondantes(jour, heure, nb)
+
         print("--------- DEBUG ---------")
         print("Jour :", jour)
-        print("Heure :", heure)
-        print("Nombre :", nb)
-        print("Liste jours :", liste_jours)
-        print("Liste heures :", liste_heures)
-        print("Liste nb :", liste_nb)
-        # Si une liste est vide → incohérence
-        if not liste_jours or not liste_heures or not liste_nb:
-            return redirect("/page_confirmation?error=2")
+        print("Critères :", heure, "pour", nb, "personnes")
+        print("IDs trouvés (brut) :", ids_all_person)
+        # print("Nombre :", nb)
+        # print("Liste jours :", liste_jours)
+        # print("Liste heures :", liste_heures)
+        # print("Liste nb :", liste_nb)
 
-        # Vérifier que ce sont bien les mêmes personnes
-        if not (set(liste_jours) == set(liste_heures) == set(liste_nb)):
-            return redirect("/page_confirmation?error=2")
+        # # Si une liste est vide → incohérence
+        # if not liste_jours or not liste_heures or not liste_nb:
+        #     return redirect("/page_confirmation?error=2")
 
-        # Copie propre
-        ids_all_person = liste_jours.copy()
+        # # Vérifier que ce sont bien les mêmes personnes
+        # if not (set(liste_jours) == set(liste_heures) == set(liste_nb)):
+        #     return redirect("/page_confirmation?error=2")
+
+        # # Copie propre
+        # ids_all_person = liste_jours.copy()
 
         # Enlever moi-même
         if id_perso in ids_all_person:
@@ -275,10 +329,13 @@ def direction_page_final():
 
         # On prend les personnes nécessaires
         ids_choisis = ids_all_person[:needed]
+        print("IDs finallement choisis (après slice) :", ids_choisis)
 
         # Récupérer les noms/prénoms
         for pid in ids_choisis:
-            personnes_par_jour[jour].append(select_info_perso(pid))
+            info_personne = select_info_perso(pid) # ex: {"nom": "Dupont", "prenom": "Jean"}
+            if info_personne: # S'assurer que la personne existe
+                personnes_par_jour[jour].append(info_personne)
 
     # -------------------------------------------------------
     # 2) Ajout en base APRÈS vérification
