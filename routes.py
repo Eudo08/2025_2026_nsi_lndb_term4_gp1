@@ -39,35 +39,6 @@ def init_db():
     con.commit()
     con.close()
 
-
-# cur.executescript("""
-#     CREATE TABLE IF NOT EXISTS information (
-#         id INTEGER PRIMARY KEY,
-#         nom TEXT,
-#         prenom TEXT,
-#         username TEXT UNIQUE,
-#         mot_de_passe TEXT
-#     );
-
-#     CREATE TABLE IF NOT EXISTS planning (
-#         id INTEGER PRIMARY KEY,
-#         user_id INTEGER,
-#         jour TEXT,
-#         heure TEXT,
-#         nb_personne INTEGER,
-#         FOREIGN KEY(user_id) REFERENCES information(id)
-#     );
-
-#     CREATE TABLE IF NOT EXISTS association (
-#         id INTEGER PRIMARY KEY,
-#         user_id INTEGER,
-#         jour TEXT,
-#         autre_id INTEGER,
-#         FOREIGN KEY(user_id) REFERENCES information(id),
-#         FOREIGN KEY(autre_id) REFERENCES information(id)
-#     );
-# """)
-
 def save_association(user_id, jour, autre_id):
     con = get_db_connection()
     cur = con.cursor()
@@ -92,8 +63,6 @@ def home():
 def acceuil():
     return render_template("page_arrive.html")
 
-
-# Route d'accueil
 @site.route("/page_arrive")      
 def bonjour():
 
@@ -162,6 +131,7 @@ def select_info_perso(id):
     con.close()
     return personne
 
+
 def check_personnes_heure_jours(heure_jour, personnes):
     if not heure_jour and personnes:
         return False
@@ -174,10 +144,6 @@ def check_personnes_heure_jours(heure_jour, personnes):
    
     return True
 
-# Dans votre fichier de gestion de base de données (ex: db_utils.py)
-
-# Si tu ajoutes une colonne:
-# ALTER TABLE planning ADD COLUMN is_booked INTEGER DEFAULT 0;
 
 def mark_as_booked(user_id, jour, heure):
     con = get_db_connection()
@@ -194,10 +160,10 @@ def mark_as_booked(user_id, jour, heure):
 
 
 def get_db_connection():
-    # Remplacez ceci par votre propre logique de connexion
     con = sqlite3.connect(DB_PATH)
     con.row_factory = sqlite3.Row
     return con
+
 
 def trouver_personnes_correspondantes(jour, heure, nb):
     con = get_db_connection()
@@ -214,6 +180,9 @@ def trouver_personnes_correspondantes(jour, heure, nb):
     ids_trouves = [row[0] for row in resultats]
     con.close()
     return ids_trouves
+
+
+
 
 
 
@@ -316,7 +285,6 @@ def direction_confirmation():
             if valid is None:
                 infos["nb"] = "aucune sélection"
 
-
         session['planning_temp'] = jours_donnees
 
         return render_template(
@@ -337,7 +305,6 @@ def direction_page_final():
 
     personnes_par_jour = {"lundi": [], "mardi": [], "mercredi": [], "jeudi": [], "vendredi": []}
 
-    # Effacer anciennes associations de cet utilisateur
     con = get_db_connection()
     cur = con.cursor()
     cur.execute("DELETE FROM association WHERE user_id = ?", (id_perso,))
@@ -373,7 +340,6 @@ def direction_page_final():
                 personnes_par_jour[jour].append(info_personne)
                 save_association(id_perso, jour, pid)
 
-    # Remplacer le planning de l'utilisateur par le nouveau
     con = get_db_connection()
     cur = con.cursor()
     cur.execute("DELETE FROM planning WHERE user_id = ?", (id_perso,))
@@ -387,156 +353,6 @@ def direction_page_final():
     session.pop("planning_temp", None)
 
     return render_template("page_finale.html", personnes_par_jour=personnes_par_jour)
-
-# @site.route("/page_finale", methods=["POST", "GET"])
-# def direction_page_final():
-#     id_perso = session.get('user_id')
-
-#     jours_donnees = session.get("planning_temp", {})
-
-#     # Dictionnaire final : liste des personnes par jour
-#     personnes_par_jour = {
-#         "lundi": [],
-#         "mardi": [],
-#         "mercredi": [],
-#         "jeudi": [],
-#         "vendredi": [],
-#     }
-#     cur.execute("DELETE FROM association WHERE user_id = ?", (id_perso,))
-#     con.commit()
-#     # -------------------------------------------------------
-#     # 1) TRAITEMENT POUR CHAQUE JOUR
-#     # -------------------------------------------------------
-#     for jour, infos in jours_donnees.items():
-        
-#         heure = infos["heure"]
-#         nb = infos["nb"]
-
-#         # Aucun choix → on saute ce jour
-#         if nb == "aucune sélection" or heure is None or heure == "":
-#             continue  
-
-#         # Convertir en int en toute sécurité
-#         try:
-#             nb = int(nb)
-#         except ValueError:
-#             return redirect("/page_confirmation?error=2")
-
-#         needed = nb - 1   # ex : 4 → 3 personnes
-
-#         # Recherche des autres personnes
-#         # liste_jours = compar_infos_dej("jour", jour)
-#         # liste_heures = compar_infos_dej("heure", heure)
-#         # liste_nb = compar_infos_dej("nb_personne", nb)
-
-#         ids_all_person = trouver_personnes_correspondantes(jour, heure, nb)
-
-#         print("--------- DEBUG ---------")
-#         print("Jour :", jour)
-#         print("Critères :", heure, "pour", nb, "personnes")
-#         print("IDs trouvés (brut) :", ids_all_person)
-#         # print("Nombre :", nb)
-#         # print("Liste jours :", liste_jours)
-#         # print("Liste heures :", liste_heures)
-#         # print("Liste nb :", liste_nb)
-
-#         # # Si une liste est vide → incohérence
-#         # if not liste_jours or not liste_heures or not liste_nb:
-#         #     return redirect("/page_confirmation?error=2")
-
-#         # # Vérifier que ce sont bien les mêmes personnes
-#         # if not (set(liste_jours) == set(liste_heures) == set(liste_nb)):
-#         #     return redirect("/page_confirmation?error=2")
-
-#         # # Copie propre
-#         # ids_all_person = liste_jours.copy()
-
-#         # Enlever moi-même
-#         if id_perso in ids_all_person:
-#             ids_all_person.remove(id_perso)
-
-#         # Assez de personnes ?
-#         if len(ids_all_person) < needed:
-#             return redirect("/page_confirmation?error=3")
-
-#         # On prend les personnes nécessaires
-#         ids_choisis = ids_all_person[:needed]
-
-#         print("IDs finallement choisis (après slice) :", ids_choisis)
-
-#         # Récupérer les noms/prénoms
-#         for pid in ids_choisis:
-#             info_personne = select_info_perso(pid) # ex: {"nom": "Dupont", "prenom": "Jean"}
-#             if info_personne: # S'assurer que la personne existe
-#                 personnes_par_jour[jour].append(info_personne)
-#             save_association(id_perso, jour, pid)
-#     # -------------------------------------------------------
-#     # 2) Ajout en base APRÈS vérification
-#     # -------------------------------------------------------
-    
-#     # Effacer ancien planning
-#     cur.execute("DELETE FROM planning WHERE user_id = ?", (id_perso,))
-#     con.commit()
-
-#     for jour, infos in jours_donnees.items():
-#         if infos["nb"] != "aucune sélection":
-#             add_planning(id_perso, jour, infos["heure"], infos["nb"])
-
-#     # -------------------------------------------------------
-#     # 3) Envoie au HTML
-#     # -------------------------------------------------------
-#     session.pop("planning_temp", None)
-
-#     return render_template("page_finale.html", personnes_par_jour=personnes_par_jour)
-
-# @site.route("/page_finale", methods=["POST", "GET"])
-# def direction_page_final ():
-#     id_perso = session.get('user_id')
-#     can_eat = True
-#     ids_person = []
-#     person = []
-
-#     jours_donnees = session.get("planning_temp", {})
-
-
-
-#     for jour, infos in jours_donnees.items():
-        
-#         heure = infos["heure"]
-#         nb = int(infos["nb"])
-#         needed = nb - 1
-
-#         liste_jours = compar_infos_dej("jour", jour)
-#         liste_heures = compar_infos_dej("heure", infos["heure"])
-#         liste_nb = compar_infos_dej("nb_personne", infos["nb"])
-
-#         print("DEBUG", jour, liste_jours, liste_heures, liste_nb)
-
-#         if not liste_jours or not liste_heures or not liste_nb:
-#             return redirect("/page_confirmation?error=2")
-
-#         if set(liste_jours) == set(liste_heures) == set(liste_nb):
-#             return redirect("/page_confirmation?error=2")
-        
-#         ids_all_person = liste_jours.copy()
-#         if id_perso in ids_all_person:
-#             ids_all_person.remove(id_perso)
-
-#         if len(ids_all_person) < needed:
-#             return redirect("/page_confirmation?error=3")
-#         ids_person.extend(ids_all_person[:needed])
-
-#     for jour, infos in jours_donnees.items():
-#         add_planning(id_perso, jour, infos["heure"], infos["nb"])
-
-
-    
-#     for p in ids_person:
-#         person.append(select_info_perso(p))
-   
-#     session.pop("planning_temp", None)
-#     print (person)
-#     return render_template("page_finale.html", person=person)
 
 @site.route("/retour_page_principale", methods=["POST", "GET"])
 def bouton_retour ():
