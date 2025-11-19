@@ -8,8 +8,7 @@
     <title>Confirmation</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styleprincipal.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/flavicon1.png') }}">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_back" />
 
 </head>
 
@@ -17,84 +16,88 @@
     <div class="page_container">
         <div class="bandeau">
             Bonn Bouf
+        <a href="/retour_page_principale" class="bouton_retour"><span class="material-symbols-outlined">
+        arrow_back
+        </span></a>
         </div>
 
         <div id="main" class="principal">
 
-            <h1 class="titre-groupes">Vos groupes</h1>
+    <h1 class="titre-groupes">Vos groupes</h1>
 
-            <div class="groupes-container">
+    <div class="groupes-container">
 
-                {% for jour, personnes in associations.items() %}
-                <div class="carte-jour">
-                    <h2 class="jour-titre">{{ jour }}</h2>
+        {% for jour, personnes in associations.items() %}
+            <div class="carte-jour">
+                <h2 class="jour-titre">{{ jour }}</h2>
 
-                    {% if personnes %}
+                {% if personnes %}
                     <ul class="liste-personnes">
                         {% for p in personnes %}
-                        <li class="personne-item">
-                            <span class="personne-icon">👤</span>
-                            {{ p[0] }} {{ p[1] }}
-                        </li>
+                            <li class="personne-item">
+                                <span class="personne-icon">👤</span>
+                                {{ p[0] }} {{ p[1] }}
+                            </li>
                         {% endfor %}
                     </ul>
 
-                    {% else %}
+                {% else %}
                     <p class="aucun-groupe">Aucun groupe pour ce jour.</p>
-                    {% endif %}
-                </div>
-                {% endfor %}
-
-                <a href="/retour_page_principale" class="btn-retour">Retour</a>
-
+                {% endif %}
             </div>
+        {% endfor %}
 
-        </div>
 
 
     </div>
-    <div class="footer-bonnbouf">
-        <h3>📞 Contact</h3>
 
-        <div class="footer-section">
-            <p><strong>Téléphone :</strong> 01 72 45 98 30</p>
-            <p><strong>Email général :</strong> contact@bonnbouf.fr</p>
-            <p><strong>Support technique :</strong> support@bonnbouf.fr</p>
+</div>
+
+
         </div>
-
-        <h3>🌐 Réseaux sociaux</h3>
-
-        <div class="footer-section">
-            <p>Instagram : <strong>@bonnbouf</strong></p>
-            <p>Facebook : <strong>Bonn Bouf Officiel</strong></p>
-            <p>TikTok : <strong>@bonnbouf_life</strong></p>
-            <p>LinkedIn : <strong>Bonn Bouf Solutions</strong></p>
+        <div class="footer-bonnbouf">
+            <h3>📞 Contact</h3>
+      
+            <div class="footer-section">
+                <p><strong>Téléphone :</strong> 01 72 45 98 30</p>
+                <p><strong>Email général :</strong> contact@bonnbouf.fr</p>
+                <p><strong>Support technique :</strong> support@bonnbouf.fr</p>
+            </div>
+        
+            <h3>🌐 Réseaux sociaux</h3>
+        
+            <div class="footer-section">
+                <p>Instagram : <strong>@bonnbouf</strong></p>
+                <p>Facebook : <strong>Bonn Bouf Officiel</strong></p>
+                <p>TikTok : <strong>@bonnbouf_life</strong></p>
+                <p>LinkedIn : <strong>Bonn Bouf Solutions</strong></p>
+            </div>
+        
+            <h3>⚖️ Mentions légales</h3>
+        
+            <div class="footer-section">
+                <p>© 2025 <strong>Bonn Bouf</strong>. Tous droits réservés.</p>
+                <p>Plateforme interne de gestion des repas.</p>
+                <p>Données sécurisées et conformes au RGPD.</p>
+                <p>Aucune information personnelle n’est partagée avec des tiers.</p>
+            </div>
+          </div>
         </div>
-
-        <h3>⚖️ Mentions légales</h3>
-
-        <div class="footer-section">
-            <p>© 2025 <strong>Bonn Bouf</strong>. Tous droits réservés.</p>
-            <p>Plateforme interne de gestion des repas.</p>
-            <p>Données sécurisées et conformes au RGPD.</p>
-            <p>Aucune information personnelle n’est partagée avec des tiers.</p>
-        </div>
-    </div>
-    </div>
     </div>
 </body>
 <script>
     const params = new URLSearchParams(window.location.search);
     const maDiv = document.getElementById('error');
-    if (!params.get('error')) {
-        if (maDiv) {
-            maDiv.style.display = 'none';
-        }
+    if (! params.get('error')) {
+      if (maDiv) {
+        maDiv.style.display = 'none';
+      }
     } else {
-        if (params.get("error") === "3") {
-            maDiv.innerHTML = "Pas assez de personnes disponibles"
-        }
+      if (params.get("error") === "3") {
+        maDiv.innerHTML = "Pas assez de personnes disponibles"
+      }
     }
-</script>
-
+  </script>
 </html>
+
+
