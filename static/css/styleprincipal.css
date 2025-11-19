@@ -69,10 +69,11 @@ color: #e67e22;
     border-radius: 12px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+    margin-top: 60px;
 }
 
 .footer-bonnbouf h3 {
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 10px;
     font-size: 22px;
     color: #ffdfdf;

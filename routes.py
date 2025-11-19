@@ -30,6 +30,11 @@ site.secret_key = "JeanPartickDeLaBruyere"
 def home():
     return render_template("page_arrive.html")
 
+@site.route("/arrive")       
+def acceuil():
+    return render_template("page_arrive.html")
+
+
 # Route d'accueil
 @site.route("/page_arrive")      
 def bonjour():
