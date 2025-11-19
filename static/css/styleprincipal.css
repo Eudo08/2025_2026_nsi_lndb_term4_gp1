@@ -62,31 +62,54 @@ color: #e67e22;
     margin-top: auto;
 } */
 
-.footer-bonnbouf {
-    background: #4e6a75;
+footer {
+    background-color: var(--paynes-gray);
     color: white;
-    padding: 10px 20px;
-    border-radius: 12px;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
+    padding: 40px 60px;
     margin-top: 60px;
+    border-radius: 12px 12px 0 0;
 }
 
-.footer-bonnbouf h3 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 22px;
-    color: #ffdfdf;
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    text-align: left;
+    gap: 40px;
 }
 
-.footer-section {
-    margin-bottom: 20px;
+.footer-col {
+    flex: 1;
+    min-width: 200px;
 }
 
-.footer-section p {
-    margin: 4px 0;
-    font-size: 16px;
-} 
+.footer-col h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--dutch-white);
+}
+
+.footer-col p,
+.footer-col a {
+    font-size: 15px;
+    margin: 6px 0;
+    color: white;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.footer-col a:hover {
+    color: var(--couleur_comple);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    opacity: 0.8;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    padding-top: 15px;
+}
 
 .flash_message {
     color: red;
