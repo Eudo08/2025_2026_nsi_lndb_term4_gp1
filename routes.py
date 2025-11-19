@@ -19,8 +19,24 @@ cur.executescript("""
         heure TEXT,
         nb_personne INTEGER,
         FOREIGN KEY(user_id) REFERENCES information(id)
-    )
+    );
+
+    CREATE TABLE IF NOT EXISTS association (
+        id INTEGER PRIMARY KEY,
+        user_id INTEGER,
+        jour TEXT,
+        autre_id INTEGER,
+        FOREIGN KEY(user_id) REFERENCES information(id),
+        FOREIGN KEY(autre_id) REFERENCES information(id)
+    );
 """)
+
+def save_association(user_id, jour, autre_id):
+    cur.execute("""
+        INSERT INTO association (user_id, jour, autre_id)
+        VALUES (?, ?, ?)
+    """, (user_id, jour, autre_id))
+    con.commit()
 
 
 # Initialisation 
@@ -44,13 +60,18 @@ def bonjour():
 
 
 def creation_pers(nom, prenom, nom_utilisateur, mot_passe):
-    cur.execute(
-        "INSERT INTO information (nom, prenom, username, mot_de_passe) VALUES(?, ?, ?, ?)",
-        (nom, prenom, nom_utilisateur, mot_passe)
-    )
-    con.commit()
-    return cur.lastrowid
-
+    try:
+        cur.execute(
+            "INSERT INTO information (nom, prenom, username, mot_de_passe) VALUES(?, ?, ?, ?)",
+            (nom, prenom, nom_utilisateur, mot_passe)
+        )
+        con.commit()
+        return cur.lastrowid
+    except sqlite3.IntegrityError as e:
+        if "UNIQUE constraint failed: information.username" in str(e):
+            return None  
+        raise e
+    
 def compar_username_motdepasse (colonne, valeurs):
     colonnes_autorisees = {"username", "mot_de_passe"}
     if colonne not in colonnes_autorisees:
@@ -172,6 +193,9 @@ def submit_and_verify():
         return redirect("/page_arrive/inscription?error=1")
     
     user_id = creation_pers(nom, prenom, nom_utilisateur, mot_passe)
+    
+    if user_id is None:
+        return redirect("/page_arrive/inscription?error=3")
     session['user_id'] = user_id
     
     return render_template("connexion.html")
@@ -188,6 +212,7 @@ def direction_connexion():
 
 
 @site.route("/page_principalev2", methods=["POST", "GET"])
+
 def direction_page_arrive():
     if "user_id" in session:
         return render_template("page_principale.html")
@@ -330,6 +355,7 @@ def direction_page_final():
 
         # On prend les personnes nécessaires
         ids_choisis = ids_all_person[:needed]
+
         print("IDs finallement choisis (après slice) :", ids_choisis)
 
         # Récupérer les noms/prénoms
@@ -337,7 +363,7 @@ def direction_page_final():
             info_personne = select_info_perso(pid) # ex: {"nom": "Dupont", "prenom": "Jean"}
             if info_personne: # S'assurer que la personne existe
                 personnes_par_jour[jour].append(info_personne)
-
+            save_association(id_perso, jour, pid)
     # -------------------------------------------------------
     # 2) Ajout en base APRÈS vérification
     # -------------------------------------------------------
@@ -404,6 +430,41 @@ def direction_page_final():
 @site.route("/retour_page_principale", methods=["POST", "GET"])
 def bouton_retour ():
     return render_template ("page_principale.html")
+
+
+def get_associations(user_id):
+    query = """
+        SELECT jour, autre_id
+        FROM association
+        WHERE user_id = ?
+    """
+    cur.execute(query, (user_id,))
+    result = cur.fetchall()
+
+    personnes_par_jour = {
+        "lundi": [],
+        "mardi": [],
+        "mercredi": [],
+        "jeudi": [],
+        "vendredi": []
+    }
+
+    for jour, pid in result:
+        personne = select_info_perso(pid)
+        if personne:
+            personnes_par_jour[jour].append(personne)
+
+    return personnes_par_jour
+
+@site.route("/page_groupes", methods=["GET"])
+def direction_page_groupes ():
+    user_id = session.get("user_id")
+
+    if not user_id:
+        return redirect("/page_arrive/connexion")
+    association = get_associations(user_id)
+
+    return render_template("groupes.html", associations=association)
 
 # Exécution
 if __name__ == '__main__':
