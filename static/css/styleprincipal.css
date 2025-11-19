@@ -466,3 +466,92 @@ select.input-menu:focus {
     transform: scale(1.05);
 }
 
+
+
+/* ----- TITRE PRINCIPAL ----- */
+.titre-groupes {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--couleur_comple);
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+/* ----- CONTAINER PRINCIPAL ----- */
+.groupes-container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* ----- CARTE PAR JOUR ----- */
+.carte-jour {
+    background: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
+    border-left: 8px solid var(--paynes-gray);
+    transition: transform 0.2s;
+}
+
+.carte-jour:hover {
+    transform: scale(1.02);
+}
+
+/* ----- TITRE DE JOUR ----- */
+.jour-titre {
+    color: var(--paynes-gray);
+    margin-bottom: 15px;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* ----- LISTE PERSONNES ----- */
+.liste-personnes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.personne-item {
+    font-size: 18px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.personne-icon {
+    font-size: 20px;
+    color: var(--couleur_comple);
+}
+
+/* ----- Aucun groupe ----- */
+.aucun-groupe {
+    font-size: 16px;
+    color: #666;
+}
+
+/* ----- BOUTON RETOUR ----- */
+.btn-retour {
+    margin: 30px auto 40px auto;
+    display: block;
+    width: fit-content;
+    padding: 10px 20px;
+    font-size: 18px;
+    background: var(--paynes-gray);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-retour:hover {
+    background: var(--couleur_comple);
+    transform: scale(1.05);
+}

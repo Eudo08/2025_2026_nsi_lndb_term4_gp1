@@ -3,12 +3,24 @@ import sqlite3
 con = sqlite3.connect("info_idividu.db")
 cur = con.cursor()
 
-print("\n--- TABLE information ---")
-for row in cur.execute("SELECT * FROM information"):
-    print(row)
+# Fonction pour afficher proprement une table
+def show_table(name):
+    print(f"\n--- TABLE {name.upper()} ---")
+    try:
+        cur.execute(f"PRAGMA table_info({name})")
+        columns = [col[1] for col in cur.fetchall()]
+        print(" | ".join(columns))
+        print("-" * 40)
 
-print("\n--- TABLE planning ---")
-for row in cur.execute("SELECT * FROM planning"):
-    print(row)
+        for row in cur.execute(f"SELECT * FROM {name}"):
+            print(" | ".join(str(x) for x in row))
+
+    except Exception as e:
+        print(f"Erreur : {e}")
+
+
+show_table("information")
+show_table("planning")
+show_table("association")
 
 con.close()

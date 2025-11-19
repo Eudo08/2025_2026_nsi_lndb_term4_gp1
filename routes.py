@@ -297,7 +297,8 @@ def direction_page_final():
         "jeudi": [],
         "vendredi": [],
     }
-
+    cur.execute("DELETE FROM association WHERE user_id = ?", (id_perso,))
+    con.commit()
     # -------------------------------------------------------
     # 1) TRAITEMENT POUR CHAQUE JOUR
     # -------------------------------------------------------
@@ -367,6 +368,11 @@ def direction_page_final():
     # -------------------------------------------------------
     # 2) Ajout en base APRÈS vérification
     # -------------------------------------------------------
+    
+    # Effacer ancien planning
+    cur.execute("DELETE FROM planning WHERE user_id = ?", (id_perso,))
+    con.commit()
+
     for jour, infos in jours_donnees.items():
         if infos["nb"] != "aucune sélection":
             add_planning(id_perso, jour, infos["heure"], infos["nb"])
@@ -465,6 +471,8 @@ def direction_page_groupes ():
     association = get_associations(user_id)
 
     return render_template("groupes.html", associations=association)
+
+
 
 # Exécution
 if __name__ == '__main__':
