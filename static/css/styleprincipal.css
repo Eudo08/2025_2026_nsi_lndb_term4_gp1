@@ -49,7 +49,7 @@ color: #e67e22;
     
 }
 
-.bandeau_bas {
+/* .bandeau_bas {
     position:relative;
     background-color: var(--paynes-gray); 
     color: white; 
@@ -60,9 +60,32 @@ color: #e67e22;
     width: 100%; 
     bottom: 0;
     margin-top: auto;
+} */
+
+.footer-bonnbouf {
+    background: #4e6a75;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
 }
 
+.footer-bonnbouf h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #ffdfdf;
+}
 
+.footer-section {
+    margin-bottom: 20px;
+}
+
+.footer-section p {
+    margin: 4px 0;
+    font-size: 16px;
+} 
 
 .flash_message {
     color: red;
