@@ -21,26 +21,28 @@
                 arrow_back
               </span></a>
         </div>
+<div id="main" class="principal">
+    <h1>Vos repas</h1>
 
-        <div id="main" class="principal">
-            <center>
-                <h1>Vos repas</h1>
-            </center>
-            <!-- <p>vous êtes matché avec {{person}}</p> -->
+    <div class="planning-container">
         {% for jour, personnes in personnes_par_jour.items() %}
-            <h3>{{ jour|capitalize }}</h3>
+            <div class="card-jour">
+                <h3>{{ jour|capitalize }}</h3>
 
-            {% if personnes %}
+                {% if personnes %}
                 <ul>
-                {% for p in personnes %}
-                    <li>{{ p[0] }} {{ p[1] }}</li>
-                {% endfor %}
+                    {% for p in personnes %}
+                        <li>{{ p[0] }} {{ p[1] }}</li>
+                    {% endfor %}
                 </ul>
-            {% else %}
+                {% else %}
                 <p>Aucune sélection</p>
-            {% endif %}
+                {% endif %}
+            </div>
         {% endfor %}
-        </div>
+    </div>
+</div>
+
         <div class="footer-bonnbouf">
             <h3>📞 Contact</h3>
       

@@ -367,3 +367,56 @@ select.input-menu:focus {
     border-color: var(--paynes-gray);
     box-shadow: 0 0 5px rgba(79, 109, 122, 0.5);
 }
+
+.planning-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+.card-jour {
+    flex: 0 0 calc(33.33% - 30px);
+    max-width: 220px;
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s, box-shadow 0.3s;
+    text-align: center;
+}
+
+
+.card-jour h3 {
+    color: var(--couleur_comple);
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.card-jour ul {
+    padding: 0;
+    list-style: none;
+}
+
+.card-jour li {
+    margin: 6px 0;
+}
+
+.card-jour p {
+    color: #777;
+}
+
+.card-jour:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    background-color: var(--dutch-white);
+}
+
+@media (max-width: 800px) {
+    .card-jour {
+        flex: 0 0 calc(50% - 30px);
+    }
+}
+.planning-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
