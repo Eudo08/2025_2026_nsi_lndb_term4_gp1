@@ -21,9 +21,6 @@ Contient l'ensemble des fichiers HTML représentant les différentes pages du si
 ### `routes.py`
 Fichier principal permettant de lancer le serveur Flask et gérant les différentes routes de l’application.
 
-### `tools.py`
-Fichier qui permet de traiter et récupérer les données nécessaires au fonctionnement du projet (fonctions utilitaires, gestion des données, etc.).
-
 ---
 
 ## ✨ Fonctionnalités
